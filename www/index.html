@@ -116,14 +116,18 @@
                         <section id="lyrics">
                             <h2 style="padding: 0 5px;">Hymn # <span id="hymnTitle"></span></h2>
                             <p id="hymnLyrics"></p>
-                            <div class="auto-scroller hidden">
-                                <button class="mdl-button mdl-js-button mdl-button--fab add">
-                                    <i class="material-icons">add</i>
-                                </button>
-                                <button class="mdl-button mdl-js-button mdl-button--fab minus">
-                                    <i class="material-icons">remove</i>
-                                </button>
-                            </div>
+                            <footer class="mdl-mini-footer navbar-fixed-bottom" id="lyricFooter">
+                                <div class="mdl-mini-footer__bottom-section">
+                                    <button class="mdl-mini-footer__social-btn">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                    <button class="mdl-mini-footer__social-btn" id="btnScroller">
+                                        <i class="fa fa-angle-double-down"></i>
+                                    </button>
+                                    <span id="scrollVal">1.00</span>
+                                    <input class="mdl-slider mdl-js-slider" id="rngScrollSpeed" type="range" value="1" min="0.01" max="2" step="0.01"/>
+                                </div>
+                            </footer>
                         </section>
                         <section id="input">
                             <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
@@ -165,6 +169,14 @@
                                     </div>
                                 </div>
                             </section>
+                            <footer class="mdl-mini-footer navbar-fixed-bottom hymn-footer">
+                                <div class="mdl-mini-footer__bottom-section">
+                                    <p class="current-hymn">Now reading: hymn #<span class="current-hymn-title">1</span></p>
+                                    <button class="mdl-mini-footer__social-btn">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </div>
+                            </footer>
                         </section>
                         <section id="search">
                             <p style="display: none"><span id="searchCount"></span> result(s) found</p>
@@ -179,6 +191,14 @@
                                     <tbody ng-repeat="ngRepeats[3]"></tbody>
                                 </table>
                             </div>
+                            <footer class="mdl-mini-footer navbar-fixed-bottom hymn-footer">
+                                <div class="mdl-mini-footer__bottom-section">
+                                    <p class="current-hymn">Now reading: hymn #<span class="current-hymn-title">1</span></p>
+                                    <button class="mdl-mini-footer__social-btn">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </div>
+                            </footer>
                         </section>
                         <section id="about">
                             <span class="mdl-layout-title">
@@ -194,7 +214,14 @@
                             <h4 class="author-name">Timothy John V. Gandionco</h4>
                             <p class="author-desc">Software and Web Developer</p>
                            
-                           
+                            <footer class="mdl-mini-footer navbar-fixed-bottom hymn-footer">
+                                <div class="mdl-mini-footer__bottom-section">
+                                    <p class="current-hymn">Now reading: hymn #<span class="current-hymn-title">1</span></p>
+                                    <button class="mdl-mini-footer__social-btn">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </div>
+                            </footer>
                         </section>
                         <section id="settings">
                             <div class="mdl-card mdl-shadow--2dp">
@@ -237,14 +264,18 @@
                                     </ul>
                                 </div>
                             </div>
-                            
+                            <footer class="mdl-mini-footer navbar-fixed-bottom hymn-footer">
+                                <div class="mdl-mini-footer__bottom-section">
+                                    <p class="current-hymn">Now reading: hymn #<span class="current-hymn-title">1</span></p>
+                                    <button class="mdl-mini-footer__social-btn">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </div>
+                            </footer>
                         </section>
-                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored hidden" id="btnPlay">
-                            <i class="material-icons">play_arrow</i>
-                        </button>
-                        <a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored hidden" id="btnInput" href="#input">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored hidden" id="btnInput" href="#input">
                             <i class="material-icons">library_books</i>
-                        </a>
+                        </button>
                     </div>
                 </main>
                 <div class="mdl-layout__obfuscator"></div>

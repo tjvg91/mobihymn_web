@@ -20,20 +20,21 @@
     }
 
     var winWidth, winHeight;
+    var scrollAnimate = 0;
 
     var ngRepeats = [{
         html: '<li class="mdl-list__item mdl-list__item--three-line" data-num="{{value.number}}" data-title="{{value.title}}" data-first-line="{{value.firstLine}}" data-hymnal="{{value.hymnalID}}" href="#lyrics">' +
             '<span class="mdl-list__item-primary-content">' +
-            '<i class="fa fa-book mdl-list__item-avatar"></i><span>Hymn #{{ value.title }}</span>' +
-            '<span class="mdl-list__item-text-body">{{ value.firstLine }}</span></span>' +
+            '<i class="fa fa-book mdl-list__item-avatar"></i><span>Hymn #{{value.title}}</span>' +
+            '<span class="mdl-list__item-text-body">{{value.firstLine}}</span></span>' +
             '<span class="mdl-list__item-secondary-content"><a class="mdl-list__item-secondary-action set-bookmark" href="#lyrics">' +
-            '<i class="material-icons" data-num="{{value.number}}" data-hymnal="{{ value.hymnalID }}">bookmark_border</i></a>' +
+            '<i class="material-icons" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}">bookmark_border</i></a>' +
             '</span></li>',
         src: 'hymnList["hymnal" + settings.currentHymnal["id"]]'
     }, {
-        html: '<li class="mdl-list__item mdl-list__item--three-line" data-num="{{value.number}}" data-title="{{value.title}}" data-first-line="{{value.firstLine}}" data-hymnal="{{ value.hymnalID }}" href="#lyrics">' +
+        html: '<li class="mdl-list__item mdl-list__item--three-line" data-num="{{value.number}}" data-title="{{value.title}}" data-first-line="{{value.firstLine}}" data-hymnal="{{value.hymnalID}}" href="#lyrics">' +
             '<span class="mdl-list__item-primary-content">' +
-            '<i class="fa fa-history mdl-list__item-avatar"></i><span>Hymn #{{ value.title }}</span>' +
+            '<i class="fa fa-history mdl-list__item-avatar"></i><span>Hymn #{{value.title}}</span>' +
             '<span class="mdl-list__item-text-body">{{ value.firstLine }}</span></span>' +
             '<span class="mdl-list__item-secondary-content"><a class="mdl-list__item-secondary-action set-bookmark" href="#">' +
             '<i class="material-icons" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}">bookmark_border</i></a>' +
@@ -43,19 +44,19 @@
         html: '<li class="mdl-list__item mdl-list__item--three-line" data-num="{{value.number}}" data-title="{{value.title}}" data-first-line="{{value.firstLine}}" data-hymnal="{{value.hymnalID}" href="#lyrics">' +
             '<span class="mdl-list__item-primary-content">' +
             '<i class="material-icons mdl-list__item-avatar">bookmark</i><span>{{ value.firstLine }}</span>' +
-            '<span class="mdl-list__item-text-body">Hymn #{{ value.title }}</span></span>' +
+            '<span class="mdl-list__item-text-body">Hymn #{{value.title}}</span></span>' +
             '<span class="mdl-list__item-secondary-content"><a class="mdl-list__item-secondary-action remove-bookmark">' +
             '<i class="material-icons" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}">remove_circle</i></a>' +
             '</span></li>',
         src: 'bookmarksList'
     }, {
-        html: '<tr data-num={{value.num}} href="#lyrics"><td class="mdl-data-table__cell--non-numeric">{{ value.num }}</td><td class="mdl-data-table__cell--non-numeric">{{ value.line }}</td></tr>',
+        html: '<tr data-num={{value.num}} href="#lyrics"><td class="mdl-data-table__cell--non-numeric">{{value.num}}</td><td class="mdl-data-table__cell--non-numeric">{{value.line}}</td></tr>',
         src: 'searchResList'
     }, {
         html: '<div class="mdl-card mdl-shadow--2dp mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone" data-color="{{value.color}}"><div class="mdl-card__title"><h2 class="mdl-card__title-text">{{value.name}}</h2></div>' +
-            '<div class="mdl-card__supporting-text">{{ value.count }} hymns</div>' +
+            '<div class="mdl-card__supporting-text">{{value.count}} hymns</div>' +
             '<div class="mdl-card__actions mdl-card--border">' +
-            '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple" href="#lyrics" data-id="{{ value.id }}" data-num="1">' +
+            '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple" href="#lyrics" data-id="{{value.id}}" data-num="1">' +
             'Read<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>' +
             '</div></div>',
         src: 'hymnalList'
@@ -220,21 +221,31 @@
             gotoHymn(e);
     }
 
-    var goToSection = function(element) {
-        var target = $(element).attr('href');
-        $('.mdl-layout__content > .page-content > section').removeClass('active');
-        $(target).addClass('active');
+    var goToSection = function (element) {
+        if (element) {
+            var target = $(element).attr('href');
+            $('.mdl-layout__content > .page-content > section').removeClass('active');
+            $(target).addClass('active');
 
-        if (target == "#lyrics") {
-            $('#btnInput, #btnPlay, #btnBookmark, .auto-scroller').removeClass('hidden');
-        } else {
-            $('#btnInput, #btnPlay, #btnBookmark, .auto-scroller').addClass('hidden');
+            if (target == "#lyrics") {
+                $('#btnInput, #btnPlay, #btnBookmark').removeClass('hidden');
+            } else {
+                $('#btnInput, #btnPlay, #btnBookmark').addClass('hidden');
+            }
+            if ($(target).children('.mdl-layout__tab-panel').length > 0) {
+                $('.mdl-layout__tab-bar-container').show();
+                $('.mdl-layout__tab-panel.is-active input').select();
+            } else {
+                $('.mdl-layout__tab-bar-container').hide();
+            }
+            if (target == "#home")
+                $('.page-content').css('padding-bottom', '0');
+            else
+                $('.page-content').css('padding-bottom', '70px');
         }
-        if ($(target).children('.mdl-layout__tab-panel').length > 0) {
-            $('.mdl-layout__tab-bar-container').show();
-            $('.mdl-layout__tab-panel.is-active input').select();
-        } else {
-            $('.mdl-layout__tab-bar-container').hide();
+        else {
+            $('.mdl-layout__content > .page-content > section').removeClass('active');
+            $('#lyrics').addClass('active');
         }
     }
 
@@ -336,6 +347,26 @@
         })
     }
 
+    var startScrolling = function (elem) {
+        var time = $('#rngScrollSpeed').val();
+        stopScrolling();
+        scrollAnimate = setInterval(function () {
+            var pos = elem.scrollTop();
+            elem.scrollTop(++pos);
+            if (elem.scrollTop() + elem.innerHeight() >= elem[0].scrollHeight) {
+                stopScrolling();
+                $('#btnScroller i').toggleClass('fa-angle-double-down fa-stop');
+            }
+        }, 100 * time);
+    }
+
+    var stopScrolling = function () {
+        if (scrollAnimate > 0) {
+            clearInterval(scrollAnimate);
+            scrollAnimate = 0;
+        }
+    }
+
     var init = function() {
         winWidth = $(window).width();
         winHeight = $(window).height();
@@ -349,9 +380,9 @@
         readRevision();
         getHymnalData('files/hymnals.json');
 
-        var contentElem = $('.page-content');
+        var contentElem = $('.mdl-layout__content .page-content');
         var myHammer = new Hammer(contentElem[0]);
-        myHammer.on("panright", function(ev) {
+        myHammer.on("swiperight", function (ev) {
             if ($('header.mdl-layout__header').css('display') != "none" && $('.mdl-layout__drawer-button').css('display') != 'none')
                 $('.mdl-layout__drawer-button').trigger('click');
         });
@@ -410,15 +441,29 @@
             }
         });
 
-        $('#hymnLyrics').click(function() {
-            $('#mainHeader').toggle();
-            $('#btnPlay, #btnInput, .auto-scroller').toggleClass('hidden');
+        $('#hymnLyrics').click(function () {
+            if ($('#btnInput').hasClass('hidden')) {
+                $('.page-content').css('padding-bottom', '70px');
+            }
+            else {
+                $('.page-content').css('padding-bottom', '0px');
+            }
+            $('#mainHeader, #lyricFooter').toggle();
+            $('#btnInput').toggleClass('hidden');
+
+        });
+
+        $('#rngScrollSpeed').change(function () {
+            var val = parseFloat($(this).val()).toFixed(2);
+            $('#scrollVal').text(val);
+            if($('#btnScroller i').hasClass('fa-stop'))
+                startScrolling($('#lyrics'));
         })
 
         $('#rngSpacing').change(function() {
             var elem = $(this);
             $('#hymnLyrics').css({
-                'padding-bottom': elem.val() + 'px'
+                'padding-bottom': (elem.val() + 55) + 'px'
             });
         })
 
@@ -448,6 +493,25 @@
                 toggleBookmark(settings.currentHymn, "remove", icon);
             }
         });
+
+        $('.hymn-footer').click(function (e) {
+            var target = $(e.target);
+            if (!target.is('button')) {
+                gotoHymn();
+            }
+        });
+
+        $('#btnScroller').click(function () {
+            var icon = $(this).find('i');
+            if (icon.hasClass('fa-angle-double-down')) {
+                icon.toggleClass('fa-angle-double-down fa-stop');
+                startScrolling($('#lyrics'));
+            }
+            else {
+                icon.toggleClass('fa-angle-double-down fa-stop');
+                stopScrolling();
+            }
+        })
     }
 
     var refreshNgRepeat = function(item, prepend) {
@@ -494,11 +558,15 @@
         })
     }
 
-    var gotoHymn = function(e) {
-        var elem = $(e.currentTarget);
-
-        var number = elem.attr('data-num');
-
+    var gotoHymn = function (e) {
+        var number;
+        if (e) {
+            var elem = $(e.currentTarget);
+            number = elem.attr('data-num');
+        }
+        else {
+            number = settings.currentHymn.num;
+        }
         hymnList["hymnal" + settings.currentHymnal.id].forEach(function(value, index) {
             if (value.number == number) {
                 settings.currentHymn = value;
@@ -525,9 +593,9 @@
             setUpListItem(e);
         })
 
-        $('#hymnTitle').html(settings.currentHymn.title);
+        $('#hymnTitle, .current-hymn > .current-hymn-title').html(settings.currentHymn.title);
         $('#hymnLyrics').html(settings.currentHymn.lyrics);
-
+        $('.mdl-card a[data-id="' + settings.currentHymnal.id + '"]').attr('data-num', number);
         goToSection(elem);
     }
 

@@ -95,9 +95,37 @@ input[type="number"]
 input[type="range"] {
   background-color: #efefef !important; }
 
-.page-content #home {
+.mdl-layout__content > .page-content #home {
   background: #0d0d0d;
   padding: 10px 0 0; }
+.mdl-layout__content > .page-content .mdl-mini-footer {
+  padding: 16px !important;
+  background: -moz-linear-gradient(top, #2b2c2f 0%, #000000 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #2b2c2f 0%, #000000 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #2b2c2f 0%, #000000 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ }
+  .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section {
+    display: flex;
+    width: 100%;
+    align-items: center; }
+    .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section button, .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section span {
+      margin: 0 5px; }
+    .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section.flex-space-between {
+      justify-content: space-between; }
+    .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section p {
+      margin: 0;
+      text-align: center; }
+    .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section .mdl-slider__container, .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section p {
+      flex-grow: 2; }
+    .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section .current-hymn .current-hymn-title {
+      margin: 0; }
+  .mdl-layout__content > .page-content .mdl-mini-footer button {
+    border: solid;
+    color: #efefef;
+    background-color: inherit;
+    border-radius: 50%; }
 
 .mdl-slider__background-flex {
   z-index: 65;
@@ -139,7 +167,8 @@ input[type="range"] {
 
 .mdl-layout__content > .page-content > section {
   height: inherit;
-  color: #efefef; }
+  color: #efefef;
+  overflow-y: auto; }
   .mdl-layout__content > .page-content > section:not(.active) {
     display: none; }
 
@@ -151,24 +180,17 @@ input[type="range"] {
   overflow: hidden;
   overflow-y: auto; }
 
-#btnPlay {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 56px;
-  height: 56px; }
-
 #btnInput {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 75px;
+  right: 10px;
   width: 56px;
   height: 56px; }
 
-#btnInput:not(.hidden), #btnPlay:not(.hidden) {
+#btnInput:not(.hidden) {
   transform: scale(1); }
 
-#btnInput.hidden, #btnPlay.hidden {
+#btnInput.hidden {
   transform: scale(0); }
 
 body {
@@ -235,6 +257,7 @@ body {
 #hymnLyrics {
   line-height: 175%;
   padding: 0 5px;
+  margin: 0;
   font-family: inherit;
   letter-spacing: 0.12em; }
 
