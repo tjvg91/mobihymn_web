@@ -105,7 +105,8 @@ input[type="range"] {
   background: -webkit-linear-gradient(top, #2b2c2f 0%, #000000 100%);
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #2b2c2f 0%, #000000 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ }
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  display: block; }
   .mdl-layout__content > .page-content .mdl-mini-footer .mdl-mini-footer__bottom-section {
     display: flex;
     width: 100%;
@@ -134,10 +135,14 @@ input[type="range"] {
     opacity: 0; }
 
 .mdl-layout__header {
-  box-shadow: none; }
+  box-shadow: none;
+  display: block; }
   .mdl-layout__header .mdl-textfield__input {
     color: #424242; }
 
+@media screen and (max-width: 1024px) {
+  .mdl-layout--fixed-header > .mdl-layout__header {
+    display: block; } }
 .mdl-layout__drawer {
   background-position: center top !important;
   border: none;

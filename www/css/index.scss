@@ -159,6 +159,7 @@ input[type="range"]{
         background: -moz-linear-gradient(top, #2b2c2f 0%, #000000 100%); /* FF3.6-15 */
         background: -webkit-linear-gradient(top, #2b2c2f 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to bottom, #2b2c2f 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        display: block;
 
         .mdl-mini-footer__bottom-section{
             display: flex;
@@ -204,11 +205,17 @@ input[type="range"]{
 
 .mdl-layout__header{
     box-shadow: none;
+    display: block;
     .mdl-textfield__input{
         color: rgb(66,66,66);
     }
 }
 
+@media screen and (max-width: 1024px)    {
+    .mdl-layout--fixed-header>.mdl-layout__header{
+        display: block;        
+    }
+}
 .mdl-layout__drawer{
     background-position: center top !important;
     border: none;

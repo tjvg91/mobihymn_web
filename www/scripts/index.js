@@ -380,12 +380,35 @@
         readRevision();
         getHymnalData('files/hymnals.json');
 
-        var contentElem = $('.mdl-layout__content .page-content');
+        var contentElem = $('.mdl-layout__content > .page-content');
         var myHammer = new Hammer(contentElem[0]);
-        myHammer.on("swiperight", function (ev) {
+        myHammer.add(new Hammer.Swipe());
+        myHammer.on("panright", function (ev) {
             if ($('header.mdl-layout__header').css('display') != "none" && $('.mdl-layout__drawer-button').css('display') != 'none')
                 $('.mdl-layout__drawer-button').trigger('click');
         });
+		
+		var hammerLyrics = new Hammer($('#hymnLyrics')[0]);
+        hammerLyrics.get('pinch').set({
+            enable: true
+        })
+        hammerLyrics.on('pinchmove pinchend', function (evt) {
+            //evt.preventDefault();
+            var orig_font = $('#hymnLyrics').css('font-size');
+            switch (evt.type) {
+                case 'pinchmove':
+                    var newFont = fontSize * evt.scale;
+                    if (newFont >= 18 && newFont <= 40) {
+                        $('#hymnLyrics').css('font-size', newFont + 'px');
+                        settings.font =  newFont;
+                    }
+                    break;
+                case 'pinchend':
+                    fontSize = parseFloat($('#hymnLyrics').css('font-size'));
+                    settings.font = fontSize;
+            }
+        });
+		
 
         $('.mdl-textfield.mdl-textfield--expandable label').click(function() {
             $(this).parent().toggleClass('is-focused');
