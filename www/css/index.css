@@ -419,6 +419,10 @@ body {
   text-align: center;
   font-size: 12px; }
 
+.mdl-snackbar.mdl-snackbar--active {
+  -webkit-transform: translate(-50%, -68px) !important;
+  transform: translate(-50%, -68px) !important; }
+
 .hymn-stanza + .hymn-stanza:nth-child(2):before {
   content: "Stanza 2:"; }
 

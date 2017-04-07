@@ -579,5 +579,10 @@ body{
     }
 }
 
+.mdl-snackbar.mdl-snackbar--active{
+    -webkit-transform:translate(-50%, -68px) !important;
+    transform:translate(-50%, -68px) !important;
+}
+
 @include verse-without-refrain;
 @include verse-with-refrain;
