@@ -87,20 +87,29 @@
                     </nav>
                 </div>
 
+                <div class="dialog-container">
+                    <dialog class="mdl-dialog" id="dialogBkmk">
+                        <h4 class="mdl-dialog__title">Sure?</h4>
+                        <div class="mdl-dialog__content">
+                            <p>
+                                Are you sure you want to remove bookmark?
+                            </p>
+                        </div>
+                        <div class="mdl-dialog__actions">
+                            <button type="button" class="mdl-button close">Yes</button>
+                            <button type="button" class="mdl-button close">No</button>
+                        </div>
+                    </dialog>
+                    <dialog id="dialogHymnal" class="mdl-dialog">
+                        <div class="mdl-card">
+                            <div class="mdl-card__title" data-bind="image">
+                                <h2 class="mdl-card__title-text" data-bind="name"></h2>
+                            </div>
+                        </div>
+                    </dialog>
+                </div>
                 <main class="mdl-layout__content">
                     <div class="page-content">
-                        <dialog class="mdl-dialog">
-                            <h4 class="mdl-dialog__title">Sure?</h4>
-                            <div class="mdl-dialog__content">
-                                <p>
-                                    Are you sure you want to remove bookmark?
-                                </p>
-                            </div>
-                            <div class="mdl-dialog__actions">
-                                <button type="button" class="mdl-button close">Yes</button>
-                                <button type="button" class="mdl-button close">No</button>
-                            </div>
-                        </dialog>
                         <div id="mySpinner">
                             <div class="mdl-spinner mdl-js-spinner is-active"></div>
                         </div>
@@ -117,14 +126,14 @@
                             <p id="hymnLyrics"></p>
                             <footer class="mdl-mini-footer navbar-fixed-bottom" id="lyricFooter">
                                 <div class="mdl-mini-footer__bottom-section">
-                                    <button class="mdl-mini-footer__social-btn">
-                                        <i class="fa fa-play"></i>
-                                    </button>
                                     <button class="mdl-mini-footer__social-btn" id="btnScroller">
                                         <i class="fa fa-angle-double-down"></i>
                                     </button>
                                     <span id="scrollVal">1.00</span>
                                     <input class="mdl-slider mdl-js-slider" id="rngScrollSpeed" type="range" value="1" min="0.01" max="2" step="0.01"/>
+                                    <button class="mdl-mini-footer__social-btn">
+                                        <i class="fa fa-play"></i>
+                                    </button>
                                 </div>
                             </footer>
                         </section>
@@ -277,7 +286,7 @@
                         </button>
                     </div>
                 </main>
-                <div class="mdl-layout__obfuscator"></div>
+                <div class="custom-obfuscator"></div>
             </div>
         </div>
     </body>

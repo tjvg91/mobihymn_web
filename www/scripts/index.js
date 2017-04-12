@@ -58,7 +58,10 @@
             '<div class="mdl-card__actions mdl-card--border">' +
             '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple" href="#lyrics" data-id="{{value.id}}" data-num="1">' +
             'Read<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>' +
-            '</div></div>',
+            '</div><div class="mdl-card__menu">' +
+            '<button class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button mdl-js-ripple-effect hymnal-info" data-id="{{value.id}}">' +
+            '<i class="fa fa-info"></i>' +
+            '</button></div></div>',
         src: 'hymnalList'
     }]
 
@@ -164,6 +167,19 @@
 
     var setUpHymnals = function() {
         refreshNgRepeat('ngRepeats[4]');
+        $('.cards .mdl-card .hymnal-info').click(function (e) {
+            var target = $(e.target);
+            if (target.is('span.mdl-button__ripple-container'))
+                target = target.parent();
+            var id = target.attr('data-id');
+            var hymnal = hymnalList.find(function (k) {
+                return k.id == id;
+            });
+            var dialog = $('#dialogHymnal');
+            dialog.find('[data-bind="name"]').text(hymnal.name);
+            dialog.find('[data-bind="image"]').css('background-image', 'url("images/hymnals/' + hymnal.image + '")');
+            toggleDialog(dialog, "show");
+        })
 
         $('.cards .mdl-card a').click(function(e) {
             e.preventDefault();
@@ -184,12 +200,18 @@
                     setUpListItem(e1);
                 });
 
+
                 gotoHymn(e);
                 $('#mySpinner').css('display', 'none');
                 $('.mdl-layout__drawer-button[role="button"]').css('display', 'block');
                 $('.mdl-layout__header-row').css('display', 'flex');
             }, 20)
         });
+    }
+
+    var toggleDialog = function (element, toggle) {
+        element.toggle(toggle);
+        $('.custom-obfuscator').toggle(toggle);
     }
 
     var setUpListItem = function(e) {
@@ -222,31 +244,29 @@
     }
 
     var goToSection = function (element) {
-        if (element) {
-            var target = $(element).attr('href');
-            $('.mdl-layout__content > .page-content > section').removeClass('active');
-            $(target).addClass('active');
+        var target = null;
+        if (element)
+            target = $(element).attr('href');
+        else 
+            target = "#lyrics";
 
-            if (target == "#lyrics") {
-                $('#btnInput, #btnPlay, #btnBookmark').removeClass('hidden');
-            } else {
-                $('#btnInput, #btnPlay, #btnBookmark').addClass('hidden');
-            }
-            if ($(target).children('.mdl-layout__tab-panel').length > 0) {
-                $('.mdl-layout__tab-bar-container').show();
-                $('.mdl-layout__tab-panel.is-active input').select();
-            } else {
-                $('.mdl-layout__tab-bar-container').hide();
-            }
-            if (target == "#home")
-                $('.page-content').css('padding-bottom', '0');
-            else
-                $('.page-content').css('padding-bottom', '70px');
+        $('.mdl-layout__content > .page-content > section').removeClass('active');
+        $(target).addClass('active');
+        if (target == "#lyrics") {
+            $('#btnInput, #btnPlay, #btnBookmark').removeClass('hidden');
+        } else {
+            $('#btnInput, #btnPlay, #btnBookmark').addClass('hidden');
         }
-        else {
-            $('.mdl-layout__content > .page-content > section').removeClass('active');
-            $('#lyrics').addClass('active');
+        if ($(target).children('.mdl-layout__tab-panel').length > 0) {
+            $('.mdl-layout__tab-bar-container').show();
+            $('.mdl-layout__tab-panel.is-active input').select();
+        } else {
+            $('.mdl-layout__tab-bar-container').hide();
         }
+        if (target == "#home")
+            $('.page-content').css('padding-bottom', '0');
+        else
+            $('.page-content').css('padding-bottom', '70px');
     }
 
     var getHymnalData = function(src, token) {
@@ -407,8 +427,7 @@
                     fontSize = parseFloat($('#hymnLyrics').css('font-size'));
                     settings.font = fontSize;
             }
-        });
-		
+        });		
 
         $('.mdl-textfield.mdl-textfield--expandable label').click(function() {
             $(this).parent().toggleClass('is-focused');
@@ -512,6 +531,7 @@
                 icon.text('bookmark');
                 toggleBookmark(settings.currentHymn, "add", icon);
             } else {
+                //$('#dialogBkmk, .custom-obfuscator').toggle();
                 icon.text('bookmark_border');
                 toggleBookmark(settings.currentHymn, "remove", icon);
             }
@@ -534,6 +554,12 @@
                 icon.toggleClass('fa-angle-double-down fa-stop');
                 stopScrolling();
             }
+        });
+
+        $('.custom-obfuscator').click(function () {
+            toggleDialog($('dialog').filter(function () {
+                return $(this).css('display') != 'none';
+            }), "hide");
         })
     }
 
@@ -554,6 +580,7 @@
                 itemString = itemString.replace(/\{\{/g, "");
                 itemString = itemString.replace(/\}\}/g, "");
                 var item = $(itemString);
+                
                 if (prepend != undefined) {
                     if (!prepend)
                         ngRepeat.append(item);
@@ -561,6 +588,18 @@
                         ngRepeat.prepend(item);
                 } else {
                     ngRepeat.append(item);
+                }
+                var icon = item.find('i.material-icons').filter(function () {
+                    return this.innerText == 'bookmark_border';
+                });
+                var bkmkNum = icon.attr('data-num');
+                var bkmkHymnal = icon.attr('data-hymnal');
+                var bkmk = bookmarksList.find(function(value){
+                    return value.num == bkmkNum && value.hymnalID == bkmkHymnal;
+                });
+
+                if (bkmk) {
+                    icon.innerText = "bookmark";
                 }
             });
         }
@@ -609,7 +648,6 @@
             recentList = recentList.slice((recentList.length - recentLength + 1), recentList.length);
         }
         recentList.push(settings.currentHymn);
-
         refreshNgRepeat('ngRepeats[1]', true);
 
         $('#listRecent li').click(function(e) {
@@ -675,12 +713,14 @@
         }
     }
 
-    var toggleBookmark = function(data, mode, icon) {
+    var toggleBookmark = function (data, mode, icon) {
+        var icon2 = $('i.material-icons[data-num="' + data.number + '"][data-hymnal="' + data.hymnalID + '"]');
         if (mode == "add") {
             icon.text('bookmark');
             bookmarksList.push(data);
             $('#snckBookmark .mdl-snackbar__text').text('Bookmark added');
             $('#snckBookmark').addClass('mdl-snackbar--active');
+            icon2.text('bookmark');
             setTimeout(function() {
                 $('#snckBookmark').removeClass('mdl-snackbar--active');
             }, 3000);
@@ -694,6 +734,7 @@
             });
             $('#snckBookmark .mdl-snackbar__text').text('Bookmark removed');
             $('#snckBookmark').addClass('mdl-snackbar--active');
+            icon2.text('bookmark_border');
             setTimeout(function() {
                 $('#snckBookmark').removeClass('mdl-snackbar--active');
             }, 3000);
