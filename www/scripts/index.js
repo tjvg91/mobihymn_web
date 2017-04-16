@@ -16,7 +16,10 @@
     var settings = {
         currentHymnal: {},
         currentHymn: {},
-        scrollSpeed: 250
+        scrollSpeed: 1.00,
+        textAlign: "left",
+        fontSize: "18px",
+        fontName: "Konsens"
     }
 
     var winWidth, winHeight;
@@ -167,12 +170,12 @@
 
     var setUpHymnals = function() {
         refreshNgRepeat('ngRepeats[4]');
-        $('.cards .mdl-card .hymnal-info').click(function (e) {
+        $('.cards .mdl-card .hymnal-info').click(function(e) {
             var target = $(e.target);
             if (target.is('span.mdl-button__ripple-container'))
                 target = target.parent();
             var id = target.attr('data-id');
-            var hymnal = hymnalList.find(function (k) {
+            var hymnal = hymnalList.find(function(k) {
                 return k.id == id;
             });
             var dialog = $('#dialogHymnal');
@@ -209,7 +212,7 @@
         });
     }
 
-    var toggleDialog = function (element, toggle) {
+    var toggleDialog = function(element, toggle) {
         element.toggle(toggle);
         $('.custom-obfuscator').toggle(toggle);
     }
@@ -243,11 +246,11 @@
             gotoHymn(e);
     }
 
-    var goToSection = function (element) {
+    var goToSection = function(element) {
         var target = null;
         if (element)
             target = $(element).attr('href');
-        else 
+        else
             target = "#lyrics";
 
         $('.mdl-layout__content > .page-content > section').removeClass('active');
@@ -367,24 +370,34 @@
         })
     }
 
-    var startScrolling = function (elem) {
-        var time = $('#rngScrollSpeed').val();
+    var startScrolling = function(elem) {
         stopScrolling();
-        scrollAnimate = setInterval(function () {
+        scrollAnimate = setInterval(function() {
             var pos = elem.scrollTop();
             elem.scrollTop(++pos);
             if (elem.scrollTop() + elem.innerHeight() >= elem[0].scrollHeight) {
                 stopScrolling();
                 $('#btnScroller i').toggleClass('fa-angle-double-down fa-stop');
             }
-        }, 100 * time);
+        }, 100 * settings.scrollSpeed);
     }
 
-    var stopScrolling = function () {
+    var stopScrolling = function() {
         if (scrollAnimate > 0) {
             clearInterval(scrollAnimate);
             scrollAnimate = 0;
         }
+    }
+
+    var setValues = function() {
+        $('button[data-align="' + settings.textAlign + '"]').addClass('mdl-button--raised');
+        $('button[data-font="' + settings.fontName + '"]').addClass('mdl-button--raised');
+        $('#hymnLyrics, #lyrics > .hymn-title').css({
+            'fontSize': settings.fontSize + 'px',
+            'fontFamily': settings.fontName,
+            'textAlign': settings.textAlign
+        });
+        $('#lyrics > .hymn-title').css('fontSize', (settings.fontSize * 1.5) + 'px');
     }
 
     var init = function() {
@@ -399,20 +412,25 @@
         readDesription();
         readRevision();
         getHymnalData('files/hymnals.json');
+        setValues();
+
+        delete Hammer.defaults.cssProps.userSelect;
 
         var contentElem = $('.mdl-layout__content > .page-content');
         var myHammer = new Hammer(contentElem[0]);
         myHammer.add(new Hammer.Swipe());
-        myHammer.on("panright", function (ev) {
+        myHammer.on("panright", function(ev) {
             if ($('header.mdl-layout__header').css('display') != "none" && $('.mdl-layout__drawer-button').css('display') != 'none')
                 $('.mdl-layout__drawer-button').trigger('click');
         });
-		
-		var hammerLyrics = new Hammer($('#hymnLyrics')[0]);
+
+        var hammerLyrics = new Hammer($('#hymnLyrics')[0], {
+            touchAction: 'pan-y'
+        });
         hammerLyrics.get('pinch').set({
             enable: true
         })
-        hammerLyrics.on('pinchmove pinchend', function (evt) {
+        hammerLyrics.on('pinchmove pinchend', function(evt) {
             //evt.preventDefault();
             var orig_font = $('#hymnLyrics').css('font-size');
             switch (evt.type) {
@@ -420,14 +438,14 @@
                     var newFont = fontSize * evt.scale;
                     if (newFont >= 18 && newFont <= 40) {
                         $('#hymnLyrics').css('font-size', newFont + 'px');
-                        settings.font =  newFont;
+                        settings.font = newFont;
                     }
                     break;
                 case 'pinchend':
                     fontSize = parseFloat($('#hymnLyrics').css('font-size'));
                     settings.font = fontSize;
             }
-        });		
+        });
 
         $('.mdl-textfield.mdl-textfield--expandable label').click(function() {
             $(this).parent().toggleClass('is-focused');
@@ -483,22 +501,26 @@
             }
         });
 
-        $('#hymnLyrics').click(function () {
-            if ($('#btnInput').hasClass('hidden')) {
-                $('.page-content').css('padding-bottom', '70px');
+        hammerLyrics.on('tap', function(e) {
+            if (e.tapCount == 1) {
+                if ($('#btnInput').hasClass('hidden')) {
+                    $('.page-content').css('padding-bottom', '70px');
+                } else {
+                    $('.page-content').css('padding-bottom', '0px');
+                }
+                $('#mainHeader, #lyricFooter').toggle();
+                $('#btnInput').toggleClass('hidden');
             }
-            else {
-                $('.page-content').css('padding-bottom', '0px');
-            }
-            $('#mainHeader, #lyricFooter').toggle();
-            $('#btnInput').toggleClass('hidden');
-
         });
 
-        $('#rngScrollSpeed').change(function () {
-            var val = parseFloat($(this).val()).toFixed(2);
-            $('#scrollVal').text(val);
-            if($('#btnScroller i').hasClass('fa-stop'))
+        hammerLyrics.on('pressup', function(e) {
+            console.log(window.getSelection().toString());
+        })
+
+        $('#rngScrollSpeed').change(function() {
+            settings.scrollSpeed = parseFloat($(this).val()).toFixed(2);
+            $('#scrollVal').text(settings.scrollSpeed);
+            if ($('#btnScroller i').hasClass('fa-stop'))
                 startScrolling($('#lyrics'));
         })
 
@@ -537,30 +559,43 @@
             }
         });
 
-        $('.hymn-footer').click(function (e) {
+        $('.hymn-footer').click(function(e) {
             var target = $(e.target);
             if (!target.is('button')) {
                 gotoHymn();
             }
         });
 
-        $('#btnScroller').click(function () {
+        $('#btnScroller').click(function() {
             var icon = $(this).find('i');
             if (icon.hasClass('fa-angle-double-down')) {
                 icon.toggleClass('fa-angle-double-down fa-stop');
                 startScrolling($('#lyrics'));
-            }
-            else {
+            } else {
                 icon.toggleClass('fa-angle-double-down fa-stop');
                 stopScrolling();
             }
         });
 
-        $('.custom-obfuscator').click(function () {
-            toggleDialog($('dialog').filter(function () {
+        $('.custom-obfuscator').click(function() {
+            toggleDialog($('dialog').filter(function() {
                 return $(this).css('display') != 'none';
             }), "hide");
-        })
+        });
+
+        $('button[data-align]').click(function() {
+            $('button[data-align]').removeClass('mdl-button--raised');
+            $(this).addClass('mdl-button--raised');
+            var align = $(this).attr('data-align');
+            $('#hymnLyrics, #lyrics > h2').css('text-align', align);
+        });
+
+        $('button[data-font]').click(function() {
+            $('button[data-font]').removeClass('mdl-button--raised');
+            $(this).addClass('mdl-button--raised');
+            var font = $(this).attr('data-font');
+            $('#hymnLyrics, #lyrics > h2').css('font-family', font);
+        });
     }
 
     var refreshNgRepeat = function(item, prepend) {
@@ -580,7 +615,7 @@
                 itemString = itemString.replace(/\{\{/g, "");
                 itemString = itemString.replace(/\}\}/g, "");
                 var item = $(itemString);
-                
+
                 if (prepend != undefined) {
                     if (!prepend)
                         ngRepeat.append(item);
@@ -589,12 +624,12 @@
                 } else {
                     ngRepeat.append(item);
                 }
-                var icon = item.find('i.material-icons').filter(function () {
+                var icon = item.find('i.material-icons').filter(function() {
                     return this.innerText == 'bookmark_border';
                 });
                 var bkmkNum = icon.attr('data-num');
                 var bkmkHymnal = icon.attr('data-hymnal');
-                var bkmk = bookmarksList.find(function(value){
+                var bkmk = bookmarksList.find(function(value) {
                     return value.num == bkmkNum && value.hymnalID == bkmkHymnal;
                 });
 
@@ -620,13 +655,12 @@
         })
     }
 
-    var gotoHymn = function (e) {
+    var gotoHymn = function(e) {
         var number;
         if (e) {
             var elem = $(e.currentTarget);
             number = elem.attr('data-num');
-        }
-        else {
+        } else {
             number = settings.currentHymn.num;
         }
         hymnList["hymnal" + settings.currentHymnal.id].forEach(function(value, index) {
@@ -713,7 +747,7 @@
         }
     }
 
-    var toggleBookmark = function (data, mode, icon) {
+    var toggleBookmark = function(data, mode, icon) {
         var icon2 = $('i.material-icons[data-num="' + data.number + '"][data-hymnal="' + data.hymnalID + '"]');
         if (mode == "add") {
             icon.text('bookmark');
