@@ -210,7 +210,7 @@ input[type="range"] {
         padding: 10px 0 0;
     }
     .mdl-mini-footer {
-        padding: 16px !important;
+        padding: 17px 16px !important;
         background: -moz-linear-gradient(top, #2b2c2f 0%, #000000 100%);
         /* FF3.6-15 */
         background: -webkit-linear-gradient(top, #2b2c2f 0%, #000000 100%);
@@ -310,7 +310,7 @@ input[type="range"] {
 }
 
 .mdl-layout__content>.page-content>section {
-    height: 102%;
+    height: 100%;
     color: #efefef;
     overflow-y: auto;
     &:not(.active) {
@@ -456,11 +456,11 @@ body {
     overflow-y: auto;
 }
 
-#input{
-    .mdl-list{
-        .mdl-list__item{
-            .mdl-list__item-primary-content{
-                .mdl-list__item-avatar{
+#input {
+    .mdl-list {
+        .mdl-list__item {
+            .mdl-list__item-primary-content {
+                .mdl-list__item-avatar {
                     font-size: 32px;
                     padding: 4px;
                 }
@@ -474,13 +474,13 @@ body {
 
 #settings {
     background-color: #0d0d0d;
-    .mdl-list{
-        .mdl-list__item{
+    .mdl-list {
+        .mdl-list__item {
             flex-wrap: wrap;
-            .mdl-list__item-primary-content{
+            .mdl-list__item-primary-content {
                 font-size: 16px;
                 font-family: KonsensBook;
-                .mdl-list__item-avatar{
+                .mdl-list__item-avatar {
                     margin-bottom: 0.5em;
                     padding-top: 7px;
                     font-size: 25px;
@@ -494,7 +494,7 @@ body {
                 z-index: 401;
                 color: #efefef;
             }
-            .mdl-list__item-tertiary-content{
+            .mdl-list__item-tertiary-content {
                 flex: 100%;
                 margin: 20px 0 0;
                 text-align: center;

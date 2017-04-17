@@ -530,9 +530,9 @@
         $('#rngSpacing').change(function() {
             var elem = $(this);
             $('#hymnLyrics').css({
-                'padding-bottom': (elem.val() + 55) + 'px'
+                'padding-bottom': (elem.val() + 10) + 'px'
             });
-            $('#valSpacing').val(elem.val() + "px");
+            $('#valSpacing').text(elem.val() + "px");
         })
 
         $('#rngLineHeight').change(function() {
@@ -542,7 +542,7 @@
             });
         });
 
-        $('#chkDropCap').change(function () {
+        $('#chkDropCap').change(function() {
             if (settings.textAlign == 'left') {
                 if (this.checked) {
                     $('#hymnLyrics').addClass('indent-first-letter');
@@ -594,19 +594,18 @@
             $(this).addClass('mdl-button--raised');
             var align = $(this).attr('data-align');
             $('#hymnLyrics, #lyrics > h2').css('text-align', align);
-            
+
             var dropCap = $('#chkDropCap');
             if (align !== 'left') {
                 if (dropCap.val() == 'on') {
                     dropCap.trigger('click');
                 }
                 dropCap.attr('disabled', 'disabled');
-            }
-            else
+            } else
                 dropCap.removeAttr('disabled');
         });
 
-        $('#chkItalic').change(function () {
+        $('#chkItalic').change(function() {
             var font;
             if (this.checked)
                 font = 'Tangerine';
