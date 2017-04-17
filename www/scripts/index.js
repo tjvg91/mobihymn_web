@@ -19,7 +19,8 @@
         scrollSpeed: 1.00,
         textAlign: "left",
         fontSize: "18px",
-        fontName: "Konsens"
+        fontName: "Konsens",
+        recentSize: 5
     }
 
     var winWidth, winHeight;
@@ -270,6 +271,7 @@
             $('.page-content').css('padding-bottom', '0');
         else
             $('.page-content').css('padding-bottom', '70px');
+        $(target).scrollTop(0);
     }
 
     var getHymnalData = function(src, token) {
@@ -398,6 +400,7 @@
             'textAlign': settings.textAlign
         });
         $('#lyrics > .hymn-title').css('fontSize', (settings.fontSize * 1.5) + 'px');
+        $('#recentLength').val(settings.recentSize);
     }
 
     var init = function() {

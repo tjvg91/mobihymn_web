@@ -45,7 +45,7 @@
   font-family: 'KonsensMedium-Italic';
   src: url("../mdlite/font/konsens/KonsensMedium-Italic.ttf") format("truetype"); }
 @font-face {
-  font-family: 'KonsensRegular';
+  font-family: 'Konsens';
   src: url("../mdlite/font/konsens/KonsensRegular.ttf") format("truetype"); }
 @font-face {
   font-family: 'KonsensRegular-Italic';
@@ -483,7 +483,7 @@ body {
         height: 200px;
         background-repeat: no-repeat;
         background-size: cover;
-        background-position-y: -16%; }
+        background-position-y: 10%; }
         .dialog-container .mdl-dialog .mdl-card .mdl-card__title .mdl-card__title-text {
           color: #efefef !important;
           font-size: 1.5rem !important;
