@@ -26,6 +26,8 @@
     var winWidth, winHeight;
     var scrollAnimate = 0;
 
+    var fontTypes = ['Konsens', 'Roboto', 'Tangerine', 'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold'];
+
     var ngRepeats = [{
         html: '<li class="mdl-list__item mdl-list__item--three-line" data-num="{{value.number}}" data-title="{{value.title}}" data-first-line="{{value.firstLine}}" data-hymnal="{{value.hymnalID}}" href="#lyrics">' +
             '<span class="mdl-list__item-primary-content">' +
@@ -68,6 +70,18 @@
             '</button></div></div>',
         src: 'hymnalList'
     }]
+
+    var popUp = '<span class="mdl-popup">' +
+                '<span class="mdl-popup__content">' +
+                '<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="#customizer">' +
+                '<i class="fa fa-paint-brush"></i>' +
+                '</button>' +
+                '</span>' +
+                '</span>';
+    var copiedText = "";
+
+    var imageContainer = null;
+
 
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
@@ -271,6 +285,12 @@
             $('.page-content').css('padding-bottom', '0');
         else
             $('.page-content').css('padding-bottom', '70px');
+        if (target == '#customizer') {
+            var width = $(target).find('.image-container').parent().width();
+            $(target).find('.image-container').css({
+                height: width + 'px'
+            });
+        }
         $(target).scrollTop(0);
     }
 
@@ -349,7 +369,12 @@
             'position': 'fixed',
             'top': parseFloat((winHeight / 2) - (scollerHeight / 2)).toFixed(2) + 'px',
             'right': '5px'
-        })
+        });
+
+        var width = $('#customizer .image-container').parent().width();
+        $('#customizer .image-container').css({
+            height: width + 'px'
+        });
     }
 
     var readDesription = function() {
@@ -403,6 +428,20 @@
         $('#recentLength').val(settings.recentSize);
     }
 
+    var getSelected = function () {
+        var sel = '';
+        if (window.getSelection) {
+            sel = window.getSelection()
+        }
+        else if (document.getSelection) {
+            sel = document.getSelection()
+        }
+        else if (document.selection) {
+            sel = document.selection.createRange()
+        }
+        return sel;
+    }
+
     var init = function() {
         winWidth = $(window).width();
         winHeight = $(window).height();
@@ -417,6 +456,8 @@
         getHymnalData('files/hymnals.json');
         setValues();
 
+        var imageContainer = $('#customizer .image-container');
+
         delete Hammer.defaults.cssProps.userSelect;
 
         var contentElem = $('.mdl-layout__content > .page-content');
@@ -426,6 +467,20 @@
             if ($('header.mdl-layout__header').css('display') != "none" && $('.mdl-layout__drawer-button').css('display') != 'none')
                 $('.mdl-layout__drawer-button').trigger('click');
         });
+
+        var imgTextFontType = $('#imgTextFontType');
+        fontTypes.forEach(function (value, index) {
+            var option = $('<option value="' + value + '">' + value + '</option>');
+            option.css('font-family', value);
+            if (index == 0)
+                option.attr('selected', 'selected');
+            imgTextFontType.append(option);
+        });
+
+        imgTextFontType.change(function () {
+            var val = $(this).val();
+            imageContainer.find('.text').css('font-family', val);
+        })
 
         var hammerLyrics = new Hammer($('#hymnLyrics')[0], {
             touchAction: 'pan-y'
@@ -504,20 +559,41 @@
             }
         });
 
-        hammerLyrics.on('tap', function(e) {
+        hammerLyrics.on('tap', function (e) {
             if (e.tapCount == 1) {
-                if ($('#btnInput').hasClass('hidden')) {
-                    $('.page-content').css('padding-bottom', '70px');
-                } else {
-                    $('.page-content').css('padding-bottom', '0px');
+                var target = $(e.target);
+                if (target.is('.fa-paint-brush') || target.is('button.mdl-button')) {
+                    if (target.is('.fa-paint-brush'))
+                        target = target.parent();
+                    copiedText = getSelected().toString();
+                    $('#customizer .image-container .text').text(copiedText);
+                    goToSection(target);
                 }
-                $('#mainHeader, #lyricFooter').toggle();
-                $('#btnInput').toggleClass('hidden');
+                else {
+                    if ($('#btnInput').hasClass('hidden')) {
+                        $('.page-content').css('padding-bottom', '70px');
+                    } else {
+                        $('.page-content').css('padding-bottom', '0px');
+                    }
+                    $('#mainHeader, #lyricFooter').toggle();
+                    $('#btnInput').toggleClass('hidden');
+                    copiedText = "";
+                }
+                if ($('#hymnLyrics').has('.mdl-popup')) {
+                    $('#hymnLyrics .mdl-popup').remove();
+                }
             }
         });
 
-        hammerLyrics.on('pressup', function(e) {
-            console.log(window.getSelection().toString());
+        hammerLyrics.on('pressup', function (e) {
+            var stRange = getSelected();
+            var pos = stRange.getRangeAt(0).getBoundingClientRect();
+            var popover = $(popUp);
+            if ($('#hymnLyrics').height() - 100 < pos.bottom)
+                popover.css('margin-top', '-4em');
+            else
+                popover.css('margin-top', '1.5em');
+            stRange.getRangeAt(0).insertNode(popover[0]);
         })
 
         $('#rngScrollSpeed').change(function() {
@@ -597,7 +673,7 @@
 
             var dropCap = $('#chkDropCap');
             if (align !== 'left') {
-                if (dropCap.val() == 'on') {
+                if (dropCap[0].checked) {
                     dropCap.trigger('click');
                 }
                 dropCap.attr('disabled', 'disabled');

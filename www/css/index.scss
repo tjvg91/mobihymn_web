@@ -160,6 +160,47 @@
     font-family: 'TangerineBold';
     src: url('../mdlite/font/tangerine/Tangerine_Bold.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'Cookie';
+    src: url('../mdlite/font/cookie/Cookie-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Gloria Hallelujah';
+    src: url('../mdlite/font/gloriahallelujah/GloriaHallelujah.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Great Vibes';
+    src: url('../mdlite/font/greatvibes/GreatVibes-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Indie Flower';
+    src: url('../mdlite/font/indieflower/IndieFlower-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Kaushan Script';
+    src: url('../mdlite/font/kaushanscript/KaushanScript-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Lobster';
+    src: url('../mdlite/font/lobster/Lobster-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Pacifico';
+    src: url('../mdlite/font/pacifico/Pacifico-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rock Salt';
+    src: url('../mdlite/font/rocksalt/RockSalt.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Satisfy';
+    src: url('../mdlite/font/satisfy/Satisfy-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Unifraktur Cook Bold';
+    src: url('../mdlite/font/unifrakturcook/UnifrakturCook-Bold.ttf') format('truetype');
+}
+
 
 html,
 body {
@@ -448,6 +489,34 @@ body {
                 line-height: 100%;
             }
         }
+        .mdl-popup{
+            position: absolute;
+            background: rgb(255,215,64);
+            margin-left: 1em;
+            padding: 10px;
+            border-radius: 11px;
+
+            /*&::after{
+                content: "";
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                background: rgb(255,215,64);
+                bottom: 44px;
+                transform: rotate(45deg);
+                z-index: 1;
+                left: 11px;
+                top: -7px;
+                border: none;
+            }*/
+
+            .mdl-popup__content{
+                button{
+                    background-color: #030303;
+                    font-size: 24px;
+                }
+            }
+        }
     }
 }
 
@@ -477,15 +546,12 @@ body {
     .mdl-list {
         .mdl-list__item {
             flex-wrap: wrap;
+            & + .mdl-list__item{
+                border-top: 1px solid #efefef;
+            }
             .mdl-list__item-primary-content {
-                font-size: 16px;
+                font-size: 18px;
                 font-family: KonsensBook;
-                .mdl-list__item-avatar {
-                    margin-bottom: 0.5em;
-                    padding-top: 7px;
-                    font-size: 25px;
-                    text-align: center;
-                }
                 span {
                     color: #efefef;
                 }
@@ -498,11 +564,51 @@ body {
                 flex: 100%;
                 margin: 20px 0 0;
                 text-align: center;
+                min-height: 34.5px;
+                .button-group{
+                    display: flex;
+                    justify-content: center;
+                    margin: 0 20px;
+                    button{
+                        flex-grow: 1;
+                        border: 2px solid rgb(255,215,64);
+                        font-size: 23px !important;
+                        height: 45px;
+                         & + button{
+                             margin-left: -1px;
+                         }
+                    }
+                }
             }
         }
     }
     label:not(.is-checked) .mdl-switch__track {
         background: rgba(255, 255, 255, 0.26) !important;
+    }
+}
+
+#customizer{
+    .mdl-grid{
+        .image-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #030303;
+            width: 100%;
+            height: 100%;
+            .text{
+                font-size: 16px;
+            }
+        }
+        .mdl-tabs{
+            .mdl-tabs__tab-bar a{
+                color: #efefef;
+            }
+            .mdl-tabs__panel{
+                padding: 20px 10px;
+            }
+        }
+        
     }
 }
 

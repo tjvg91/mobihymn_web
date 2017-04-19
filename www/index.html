@@ -249,15 +249,17 @@
                                     Lyrics Alignment
                                 </span>
                                 <span class="mdl-list__item-tertiary-content">
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-align="left">
-                                        <i class="fa fa-align-left"></i>
-                                    </button>
-                                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" data-align="center">
-                                        <i class="fa fa-align-center"></i>
-                                    </button>
-                                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" data-align="right">
-                                        <i class="fa fa-align-right"></i>
-                                    </button>
+                                    <span class="button-group">
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-align="left">
+                                            <i class="fa fa-align-left"></i>
+                                        </button>
+                                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" data-align="center">
+                                            <i class="fa fa-align-center"></i>
+                                        </button>
+                                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" data-align="right">
+                                            <i class="fa fa-align-right"></i>
+                                        </button>
+                                    </span>
                                 </span>
                             </div>
                             <div class="mdl-list__item">
@@ -289,80 +291,64 @@
                                 </span>
                             </div>
                         </div>
-                            <!--<div class="mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__supporting-text">
-                <div class="settings">
-                    <p class="text">Extra spacing</p>
-                    <div class="component">
-                        <input class="mdl-slider mdl-js-slider" type="range" min="0" max="500" value="0" tabindex="0" step="10" id="rngSpacing" style="text-align: right" />
-                    </div>
-                </div>
-                <div class="settings" style="display: none">
-                    <p class="text">Line spacing</p>
-                    <div class="component">
-                        <input class="mdl-slider mdl-js-slider" type="range" min="150" max="200" value="175" tabindex="0" step="1" id="rngLineHeight" />
-                    </div>
-                </div>
-                <div class="settings">
-                    <p class="text">Lyrics alignment</p>
-                    <div class="component">
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-align="left">
-                            <i class="fa fa-align-left"></i>
-                        </button>
-                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" data-align="center">
-                            <i class="fa fa-align-center"></i>
-                        </button>
-                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" data-align="right">
-                            <i class="fa fa-align-right"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="settings">
-                    <p class="text">Lyrics Font Type</p>
-                    <div class="component mdl-grid">
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" data-font="Konsens">
-                            Normal
-                        </button>
-                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" data-font="Tangerine">
-                            Italic
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__supporting-text">
-                <ul class="demo-list-item mdl-list">
-                    <li class="mdl-list__item">
-                        <label class="mdl-list__item-primary-content" for="chkDropCap">
-                            Drop-cap first letter
-                        </label>
-                        <span class="mdl-list__item-secondary-content">
-                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="chkDropCap">
-                                <input type="checkbox" id="chkDropCap" class="mdl-switch__input"/>
-                            </label>
-                        </span>
-                    </li>
-                    <li class="mdl-list__item">
-                        <span class="mdl-list__item-primary-content">
-                            Max number of recent list
-                        </span>
-                        <span class="mdl-list__item-secondary-content">
-                            <input type="number" min="1" max="10" value="5" id="recentLength" style="text-align: right"/>
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </div>-->
-                            <footer class="mdl-mini-footer navbar-fixed-bottom hymn-footer">
-                                <div class="mdl-mini-footer__bottom-section">
-                                    <p class="current-hymn">Now reading: hymn #<span class="current-hymn-title">1</span></p>
-                                    <button class="mdl-mini-footer__social-btn">
-                                        <i class="fa fa-play"></i>
-                                    </button>
+                        <footer class="mdl-mini-footer navbar-fixed-bottom hymn-footer">
+                            <div class="mdl-mini-footer__bottom-section">
+                                <p class="current-hymn">Now reading: hymn #<span class="current-hymn-title">1</span></p>
+                                <button class="mdl-mini-footer__social-btn">
+                                    <i class="fa fa-play"></i>
+                                </button>
+                            </div>
+                        </footer>
+                    </section>
+                    <section id="customizer">
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col mdl-cell--3-col-tablet">
+                                <div class="image-container">
+                                    <p class="text"></p>
                                 </div>
-                            </footer>
-</section>
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col mdl-cell--5-col-tablet">
+                                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                                    <div class="mdl-tabs__tab-bar">
+                                        <a href="#customizer1" class="mdl-tabs__tab is-active">
+                                            <i class="fa fa-image"></i>
+                                        </a>
+                                        <a href="#customizer2" class="mdl-tabs__tab">
+                                            <i class="fa fa-font"></i>
+                                        </a>
+                                    </div>
+                                    <div class="mdl-tabs__panel is-active" id="customizer1">
+                                        <ul>
+                                            <li>Tywin</li>
+                                            <li>Cersei</li>
+                                            <li>Jamie</li>
+                                            <li>Tyrion</li>
+                                        </ul>
+                                    </div>
+                                    <div class="mdl-tabs__panel" id="customizer2">
+                                        <ul class="md-list">
+                                            <li class="md-list__item">
+                                                <span class="mdl-list__item-primary-content">
+                                                    Font type:
+                                                </span>
+                                                <span class="mdl-list__item-secondary-content">
+                                                    <select id="imgTextFontType"></select>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="mdl-mini-footer navbar-fixed-bottom hymn-footer">
+                            <div class="mdl-mini-footer__bottom-section">
+                                <p class="current-hymn">Now reading: hymn #<span class="current-hymn-title">1</span></p>
+                                <button class="mdl-mini-footer__social-btn">
+                                    <i class="fa fa-play"></i>
+                                </button>
+                            </div>
+                        </footer>
+                    </section>
                     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored hidden" id="btnInput" href="#input">
                         <i class="material-icons">library_books</i>
                     </button>

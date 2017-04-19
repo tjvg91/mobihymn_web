@@ -3,116 +3,119 @@
     transform: scale(1); }
   100% {
     transform: scale(0); } }
-
 @keyframes scale-up {
   0% {
     transform: scale(0); }
   100% {
     transform: scale(1); } }
-
 @font-face {
   font-family: 'KonsensBold';
   src: url("../mdlite/font/konsens/KonsensBold.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensBold-Italic';
   src: url("../mdlite/font/konsens/KonsensBold-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensBook';
   src: url("../mdlite/font/konsens/KonsensBook.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensBook-Italic';
   src: url("../mdlite/font/konsens/KonsensBook-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensExtrabold';
   src: url("../mdlite/font/konsens/KonsensExtrabold.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensExtrabold-Italic';
   src: url("../mdlite/font/konsens/KonsensExtrabold-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensHeavy';
   src: url("../mdlite/font/konsens/KonsensHeavy.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensHeavy-Italic';
   src: url("../mdlite/font/konsens/KonsensHeavy-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensLight';
   src: url("../mdlite/font/konsens/KonsensLight.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensLight-Italic';
   src: url("../mdlite/font/konsens/KonsensLight-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensMedium';
   src: url("../mdlite/font/konsens/KonsensMedium.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensMedium-Italic';
   src: url("../mdlite/font/konsens/KonsensMedium-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'Konsens';
   src: url("../mdlite/font/konsens/KonsensRegular.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensRegular-Italic';
   src: url("../mdlite/font/konsens/KonsensRegular-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensSemibold';
   src: url("../mdlite/font/konsens/KonsensSemibold.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensSemibold-Italic';
   src: url("../mdlite/font/konsens/KonsensSemibold-Italic.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensUltrabold';
   src: url("../mdlite/font/konsens/KonsensUltrabold.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'KonsensUltrabold-Italic';
   src: url("../mdlite/font/konsens/KonsensUltrabold-Italic.ttf") format("truetype"); }
-
 * {
   -webkit-tap-highlight-color: transparent; }
 
 @font-face {
   font-family: 'Roboto-Bold';
   src: url("../mdlite/font/roboto/Roboto-Bold.eot") format("embedded-opentype"), url("../mdlite/font/roboto/Roboto-Bold.ttf") format("truetype"), url("../mdlite/font/roboto/Roboto-Bold.woff") format("woff"); }
-
 @font-face {
   font-family: 'Roboto-Light';
   src: url("../mdlite/font/roboto/Roboto-Light.eot") format("embedded-opentype"), url("../mdlite/font/roboto/Roboto-Light.ttf") format("truetype"), url("../mdlite/font/roboto/Roboto-Light.woff") format("woff"); }
-
 @font-face {
   font-family: 'Roboto-Medium';
   src: url("../mdlite/font/roboto/Roboto-Medium.eot") format("embedded-opentype"), url("../mdlite/font/roboto/Roboto-Medium.ttf") format("truetype"), url("../mdlite/font/roboto/Roboto-Medium.woff") format("woff"); }
-
 @font-face {
   font-family: 'Roboto-Regular';
   src: url("../mdlite/font/roboto/Roboto-Regular.eot") format("embedded-opentype"), url("../mdlite/font/roboto/Roboto-Regular.ttf") format("truetype"), url("../mdlite/font/roboto/Roboto-Regular.woff") format("woff"); }
-
 @font-face {
   font-family: 'Roboto-Thin';
   src: url("../mdlite/font/roboto/Roboto-Thin.eot") format("embedded-opentype"), url("../mdlite/font/roboto/Roboto-Thin.ttf") format("truetype"), url("../mdlite/font/roboto/Roboto-Thin.woff") format("woff"); }
-
 @font-face {
   font-family: 'Tangerine';
   src: url("../mdlite/font/tangerine/Tangerine_Regular.ttf") format("truetype"); }
-
 @font-face {
   font-family: 'TangerineBold';
   src: url("../mdlite/font/tangerine/Tangerine_Bold.ttf") format("truetype"); }
-
+@font-face {
+  font-family: 'Cookie';
+  src: url("../mdlite/font/cookie/Cookie-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Gloria Hallelujah';
+  src: url("../mdlite/font/gloriahallelujah/GloriaHallelujah.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Great Vibes';
+  src: url("../mdlite/font/greatvibes/GreatVibes-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Indie Flower';
+  src: url("../mdlite/font/indieflower/IndieFlower-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Kaushan Script';
+  src: url("../mdlite/font/kaushanscript/KaushanScript-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Lobster';
+  src: url("../mdlite/font/lobster/Lobster-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Pacifico';
+  src: url("../mdlite/font/pacifico/Pacifico-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Rock Salt';
+  src: url("../mdlite/font/rocksalt/RockSalt.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Satisfy';
+  src: url("../mdlite/font/satisfy/Satisfy-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Unifraktur Cook Bold';
+  src: url("../mdlite/font/unifrakturcook/UnifrakturCook-Bold.ttf") format("truetype"); }
 html,
 body {
   height: 100%;
@@ -127,7 +130,6 @@ body {
   .mdl-layout__header-row {
     height: 56px;
     padding: 0 16px 0 52px !important; } }
-
 input[type="number"],
 input[type="text"] {
   color: #efefef; }
@@ -151,7 +153,6 @@ input[type="range"] {
 .mdl-layout__content > .page-content #home {
   background: #0d0d0d;
   padding: 10px 0 0; }
-
 .mdl-layout__content > .page-content .mdl-mini-footer {
   padding: 17px 16px !important;
   background: -moz-linear-gradient(top, #2b2c2f 0%, #000000 100%);
@@ -201,7 +202,6 @@ input[type="range"] {
 @media screen and (max-width: 1024px) {
   .mdl-layout--fixed-header > .mdl-layout__header {
     display: block; } }
-
 .mdl-layout__drawer {
   background-position: center top !important;
   border: none;
@@ -331,7 +331,6 @@ body {
 
 #lyrics #hymnTitle {
   padding: 0; }
-
 #lyrics #hymnLyrics {
   line-height: 175%;
   padding: 0 5px;
@@ -342,6 +341,28 @@ body {
     width: 0.7em;
     font-size: 340%;
     line-height: 100%; }
+  #lyrics #hymnLyrics .mdl-popup {
+    position: absolute;
+    background: #ffd740;
+    margin-left: 1em;
+    padding: 10px;
+    border-radius: 11px;
+    /*&::after{
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: rgb(255,215,64);
+        bottom: 44px;
+        transform: rotate(45deg);
+        z-index: 1;
+        left: 11px;
+        top: -7px;
+        border: none;
+    }*/ }
+    #lyrics #hymnLyrics .mdl-popup .mdl-popup__content button {
+      background-color: #030303;
+      font-size: 24px; }
 
 .table-results {
   overflow: hidden;
@@ -350,7 +371,6 @@ body {
 #input .mdl-list .mdl-list__item .mdl-list__item-primary-content .mdl-list__item-avatar {
   font-size: 32px;
   padding: 4px; }
-
 #input .mdl-list .mdl-list__item .mdl-list__item-primary-content span {
   color: #efefef; }
 
@@ -358,14 +378,11 @@ body {
   background-color: #0d0d0d; }
   #settings .mdl-list .mdl-list__item {
     flex-wrap: wrap; }
+    #settings .mdl-list .mdl-list__item + .mdl-list__item {
+      border-top: 1px solid #efefef; }
     #settings .mdl-list .mdl-list__item .mdl-list__item-primary-content {
-      font-size: 16px;
+      font-size: 18px;
       font-family: KonsensBook; }
-      #settings .mdl-list .mdl-list__item .mdl-list__item-primary-content .mdl-list__item-avatar {
-        margin-bottom: 0.5em;
-        padding-top: 7px;
-        font-size: 25px;
-        text-align: center; }
       #settings .mdl-list .mdl-list__item .mdl-list__item-primary-content span {
         color: #efefef; }
     #settings .mdl-list .mdl-list__item .mdl-list__item-secondary-content {
@@ -374,18 +391,42 @@ body {
     #settings .mdl-list .mdl-list__item .mdl-list__item-tertiary-content {
       flex: 100%;
       margin: 20px 0 0;
-      text-align: center; }
+      text-align: center;
+      min-height: 34.5px; }
+      #settings .mdl-list .mdl-list__item .mdl-list__item-tertiary-content .button-group {
+        display: flex;
+        justify-content: center;
+        margin: 0 20px; }
+        #settings .mdl-list .mdl-list__item .mdl-list__item-tertiary-content .button-group button {
+          flex-grow: 1;
+          border: 2px solid #ffd740;
+          font-size: 23px !important;
+          height: 45px; }
+          #settings .mdl-list .mdl-list__item .mdl-list__item-tertiary-content .button-group button + button {
+            margin-left: -1px; }
   #settings label:not(.is-checked) .mdl-switch__track {
     background: rgba(255, 255, 255, 0.26) !important; }
+
+#customizer .mdl-grid .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #030303;
+  width: 100%;
+  height: 100%; }
+  #customizer .mdl-grid .image-container .text {
+    font-size: 16px; }
+#customizer .mdl-grid .mdl-tabs .mdl-tabs__tab-bar a {
+  color: #efefef; }
+#customizer .mdl-grid .mdl-tabs .mdl-tabs__panel {
+  padding: 20px 10px; }
 
 @media (max-width: 479px) {
   #home .mdl-card + .mdl-card {
     margin-top: 20px; } }
-
 @media (min-width: 480px) {
   #home .mdl-card + .mdl-card {
     margin-top: 0; } }
-
 .mdl-card .mdl-card__supporting-text {
   width: inherit; }
   .mdl-card .mdl-card__supporting-text .text {
@@ -469,33 +510,27 @@ body {
   text-align: center; }
   #about .mdl-layout-title img {
     padding: 10px 0 10px 10px; }
-
 #about #description {
   text-align: center;
   padding: 0 10px;
   font-size: 20px; }
-
 #about .revision-title {
   font-weight: bold;
   margin: 50px 0 5px;
   color: #ffeb3b; }
-
 #about .revision-title,
 #about #revision-list {
   text-align: center;
   padding: 0 10px; }
-
 #about #revision-list {
   font-size: 20px; }
   #about #revision-list .revision {
     text-decoration: underline; }
-
 #about .author {
   margin: 50px 0 5px;
   text-align: center;
   font-weight: bold;
   color: #ffeb3b; }
-
 #about .author-image {
   width: 100px;
   height: 100px;
@@ -503,11 +538,9 @@ body {
   margin: 0 auto;
   background: #ffffff;
   display: block; }
-
 #about .author-name {
   text-align: center;
   margin: 5px 0 0; }
-
 #about .author-desc {
   text-align: center;
   font-size: 12px; }
@@ -535,13 +568,11 @@ body {
   .mdl-snackbar.mdl-snackbar--active {
     -webkit-transform: translate(-50%, -68px);
     transform: translate(-50%, -68px); } }
-
 @media (max-width: 479px) {
   .mdl-snackbar.mdl-snackbar--active {
     width: auto;
     -webkit-transform: translate(23%, -68px) !important;
     transform: translate(23%, -68px) !important; } }
-
 .hymn-stanza + .hymn-stanza:nth-child(2):before {
   content: "Stanza 2:"; }
 
@@ -595,3 +626,5 @@ body {
 
 .hymn-refrain + .hymn-stanza:nth-child(19):before {
   content: "Stanza 10:"; }
+
+/*# sourceMappingURL=index.css.map */
