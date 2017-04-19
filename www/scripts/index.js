@@ -25,8 +25,10 @@
             fontName: 'Konsens',
             fontSize: '16px',
             fontClass: 'white',
+            fontClassAdd: '',
             backType: 'color',
             backClass: '',
+            backClassAdd: '',
             backImage: {
                 src: '',
                 size: 'auto'
@@ -44,6 +46,8 @@
     var fontTypes = ['Konsens', 'Roboto', 'Tangerine', /*'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold', 'Clicker Script', 'Rancho', 'Parisienne', 'Pangolin', 'Petit Formal Script', 'Yesteryear', 'BerkshireSwash', 'Montez', 'Norican', 'Griffy'*/];
 
     var colorNames = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'blue-grey', 'grey', 'black', 'white']
+
+    var addColors = ['lighten-5', 'lighten-4', 'lighten-3', 'lighten-2', 'lighten-1', '', 'darken-1', 'darken-2', 'darken-3', 'darken-4', 'accent-1', 'accent-2', 'accent-3', 'accent-4']
 
     var backTypes = ['color', 'image'];
 
@@ -90,13 +94,6 @@
         src: 'hymnalList'
     }]
 
-    var popUp = '<span class="mdl-popup">' +
-                '<span class="mdl-popup__content">' +
-                '<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="#customizer">' +
-                '<i class="fa fa-paint-brush"></i>' +
-                '</button>' +
-                '</span>' +
-                '</span>';
     var colorItem = '<li class="color"></li>'
     var backTypeItem = '<option></option>';
     var copiedText = "";
@@ -463,6 +460,17 @@
         return sel;
     }
 
+    var myToggleClass = function (elem, oldAddOn, newAddOn) {
+        if (newAddOn) {
+            if (oldAddOn)
+                elem.toggleClass(newAddOn + ' ' + oldAddOn);
+            else
+                elem.toggleClass(newAddOn);
+        }
+        else if (oldAddOn)
+            elem.toggleClass(oldAddOn);
+    }
+
     var init = function() {
         winWidth = $(window).width();
         winHeight = $(window).height();
@@ -514,13 +522,14 @@
                     var target = $(this).attr('data-target');
                     var className = $(this).data('color');
                     if ($(target).is('.image-container .text')) {
-                        if (settings.customizer.fontClass)
+                        if (settings.customizer.fontClass) 
                             $(target).removeClass(settings.customizer.fontClass);
                         settings.customizer.fontClass = className;
                     }
                     else {
                         if (settings.customizer.backClass)
                             $(target).removeClass(settings.customizer.backClass);
+                        
                         settings.customizer.backClass = className;
                     }
                     $(target).addClass(className);
