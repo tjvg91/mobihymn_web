@@ -160,7 +160,7 @@
     font-family: 'TangerineBold';
     src: url('../mdlite/font/tangerine/Tangerine_Bold.ttf') format('truetype');
 }
-@font-face {
+/*@font-face {
     font-family: 'Cookie';
     src: url('../mdlite/font/cookie/Cookie-Regular.ttf') format('truetype');
 }
@@ -200,7 +200,22 @@
     font-family: 'Unifraktur Cook Bold';
     src: url('../mdlite/font/unifrakturcook/UnifrakturCook-Bold.ttf') format('truetype');
 }
-
+@font-face {
+    font-family: 'Clicker Script';
+    src: url('../mdlite/font/clickerscript/ClickerScript-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rancho';
+    src: url('../mdlite/font/rancho/Rancho-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Parisienne';
+    src: url('../mdlite/font/parisienne/Parisienne-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Pangolin';
+    src: url('../mdlite/font/pangolin/Pangolin-Regular.ttf') format('truetype');
+}*/
 
 html,
 body {
@@ -377,6 +392,18 @@ input[type="range"] {
     height: 56px;
 }
 
+#btnCustomizer{
+    position: fixed;
+    background: rgb(255,215,64);
+    color: rgb(66,66,66);
+    bottom: 135px;
+    right: 10px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    font-size: 24px;
+}
+
 #btnInput:not(.hidden) {
     transform: scale(1);
 }
@@ -489,34 +516,6 @@ body {
                 line-height: 100%;
             }
         }
-        .mdl-popup{
-            position: absolute;
-            background: rgb(255,215,64);
-            margin-left: 1em;
-            padding: 10px;
-            border-radius: 11px;
-
-            /*&::after{
-                content: "";
-                position: absolute;
-                width: 12px;
-                height: 12px;
-                background: rgb(255,215,64);
-                bottom: 44px;
-                transform: rotate(45deg);
-                z-index: 1;
-                left: 11px;
-                top: -7px;
-                border: none;
-            }*/
-
-            .mdl-popup__content{
-                button{
-                    background-color: #030303;
-                    font-size: 24px;
-                }
-            }
-        }
     }
 }
 
@@ -596,8 +595,10 @@ body {
             background: #030303;
             width: 100%;
             height: 100%;
+            padding: 20px;
             .text{
                 font-size: 16px;
+                text-align: center;
             }
         }
         .mdl-tabs{
@@ -608,7 +609,29 @@ body {
                 padding: 20px 10px;
             }
         }
-        
+    }
+
+    .mdl-list{
+        .mdl-list__item{
+            flex-wrap: wrap;
+            .mdl-list__item-tertiary-content {
+                flex: 100%;
+                margin: 20px 0 0;
+                text-align: center;
+                min-height: 34.5px;
+            }
+        }
+    }
+
+    .palette{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        list-style: none;
+        .color{
+            width: 25px;
+            height: 25px;
+        }
     }
 }
 

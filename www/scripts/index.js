@@ -20,13 +20,32 @@
         textAlign: "left",
         fontSize: "18px",
         fontName: "Konsens",
-        recentSize: 5
+        recentSize: 5,
+        customizer: {
+            fontName: 'Konsens',
+            fontSize: '16px',
+            fontClass: 'white',
+            backType: 'color',
+            backClass: '',
+            backImage: {
+                src: '',
+                size: 'auto'
+            },
+            backPos: {
+                x: 0,
+                y: 0
+            }
+        }
     }
 
     var winWidth, winHeight;
     var scrollAnimate = 0;
 
-    var fontTypes = ['Konsens', 'Roboto', 'Tangerine', 'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold'];
+    var fontTypes = ['Konsens', 'Roboto', 'Tangerine', /*'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold', 'Clicker Script', 'Rancho', 'Parisienne', 'Pangolin'*/];
+
+    var colorNames = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'blue-grey', 'grey', 'black', 'white']
+
+    var backTypes = ['color', 'image'];
 
     var ngRepeats = [{
         html: '<li class="mdl-list__item mdl-list__item--three-line" data-num="{{value.number}}" data-title="{{value.title}}" data-first-line="{{value.firstLine}}" data-hymnal="{{value.hymnalID}}" href="#lyrics">' +
@@ -78,10 +97,11 @@
                 '</button>' +
                 '</span>' +
                 '</span>';
+    var colorItem = '<li class="color"></li>'
+    var backTypeItem = '<option></option>';
     var copiedText = "";
 
     var imageContainer = null;
-
 
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
@@ -291,6 +311,7 @@
                 height: width + 'px'
             });
         }
+        $('#btnCustomizer').addClass('hidden');
         $(target).scrollTop(0);
     }
 
@@ -471,16 +492,58 @@
         var imgTextFontType = $('#imgTextFontType');
         fontTypes.forEach(function (value, index) {
             var option = $('<option value="' + value + '">' + value + '</option>');
-            option.css('font-family', value);
-            if (index == 0)
-                option.attr('selected', 'selected');
+            option.css('font-family', value);            
             imgTextFontType.append(option);
         });
+        imgTextFontType.val(settings.customizer.fontName);
+
+        var palette = $('.palette');
+        colorNames.forEach(function (value, index) {
+            palette.each(function () {
+                var li = $(colorItem);
+                var target = $(this).attr('data-target');
+                li.addClass(value);
+                if ($(target).is('.image-container .text')) {
+                    li.data('color', value + '-text');
+                }
+                else {
+                    li.data('color', value);
+                }
+                li.attr('data-target', target);
+                li.click(function () {
+                    var target = $(this).attr('data-target');
+                    var className = $(this).data('color');
+                    if ($(target).is('.image-container .text')) {
+                        if (settings.customizer.fontClass)
+                            $(target).removeClass(settings.customizer.fontClass);
+                        settings.customizer.fontClass = className;
+                    }
+                    else {
+                        if (settings.customizer.backClass)
+                            $(target).removeClass(settings.customizer.backClass);
+                        settings.customizer.backClass = className;
+                    }
+                    $(target).addClass(className);
+                });
+                $(this).append(li);
+            })
+
+        })
 
         imgTextFontType.change(function () {
             var val = $(this).val();
             imageContainer.find('.text').css('font-family', val);
-        })
+            settings.customizer.fontName = val;
+        });
+
+        var backType = $('#backType');
+        backTypes.forEach(function (value, index) {
+            var option = $(backTypeItem);
+            option.attr('value', value);
+            option.text(value);
+            backType.append(option);
+        });
+        backType.val(settings.customizer.backType);
 
         var hammerLyrics = new Hammer($('#hymnLyrics')[0], {
             touchAction: 'pan-y'
@@ -517,10 +580,21 @@
             dynamicSizes();
         })
 
-        $('#btnInput').click(function(e) {
+        $('#btnInput').click(function (e) {
             e.preventDefault();
             goToSection(this);
         });
+        $('#btnCustomizer').click(function (e) {
+            e.preventDefault();
+            var target = $(e.target);
+            if (target.is('.fa-paint-brush'))
+                target = target.parent();
+            copiedText = getSelected().toString();
+            copiedText = copiedText.replace(/[\n]/gm, '<br/>');
+            $('#customizer .image-container .text').html(copiedText);
+            goToSection(this);
+            $(this).addClass('hidden');
+        })
 
         var contentHeight = $(window).height() - $('.mdl-layout__header').height();
         $('.mdl-layout__content').css('height', '100%');
@@ -562,38 +636,20 @@
         hammerLyrics.on('tap', function (e) {
             if (e.tapCount == 1) {
                 var target = $(e.target);
-                if (target.is('.fa-paint-brush') || target.is('button.mdl-button')) {
-                    if (target.is('.fa-paint-brush'))
-                        target = target.parent();
-                    copiedText = getSelected().toString();
-                    $('#customizer .image-container .text').text(copiedText);
-                    goToSection(target);
+                if ($('#btnInput').hasClass('hidden')) {
+                    $('.page-content').css('padding-bottom', '70px');
+                } else {
+                    $('.page-content').css('padding-bottom', '0px');
                 }
-                else {
-                    if ($('#btnInput').hasClass('hidden')) {
-                        $('.page-content').css('padding-bottom', '70px');
-                    } else {
-                        $('.page-content').css('padding-bottom', '0px');
-                    }
-                    $('#mainHeader, #lyricFooter').toggle();
-                    $('#btnInput').toggleClass('hidden');
-                    copiedText = "";
-                }
-                if ($('#hymnLyrics').has('.mdl-popup')) {
-                    $('#hymnLyrics .mdl-popup').remove();
-                }
+                $('#mainHeader, #lyricFooter').toggle();
+                $('#btnInput').toggleClass('hidden');
+                copiedText = "";
+                $('#btnCustomizer').addClass('hidden');
             }
         });
 
         hammerLyrics.on('pressup', function (e) {
-            var stRange = getSelected();
-            var pos = stRange.getRangeAt(0).getBoundingClientRect();
-            var popover = $(popUp);
-            if ($('#hymnLyrics').height() - 100 < pos.bottom)
-                popover.css('margin-top', '-4em');
-            else
-                popover.css('margin-top', '1.5em');
-            stRange.getRangeAt(0).insertNode(popover[0]);
+            $('#btnCustomizer').toggleClass('hidden');
         })
 
         $('#rngScrollSpeed').change(function() {

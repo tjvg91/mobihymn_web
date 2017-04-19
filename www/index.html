@@ -16,9 +16,7 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="material-icons/css/material-icons.min.css" rel="stylesheet" />
     <link href="mdlite/css/material.yellow-amber.min.css" rel="stylesheet" />
-    <link href="mdlite/css/bootstrap.css" rel="stylesheet" />
     <link href="mdlite/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="mdlite/css/mdb.css" rel="stylesheet" />
     <link href="mdlite/css/mdb.min.css" rel="stylesheet" />
     <link href="mdlite/css/style.css" rel="stylesheet" />
 
@@ -304,7 +302,7 @@
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--12-col mdl-cell--3-col-tablet">
                                 <div class="image-container">
-                                    <p class="text"></p>
+                                    <p class="text" contenteditable="true"></p>
                                 </div>
                             </div>
                             <div class="mdl-cell mdl-cell--12-col mdl-cell--5-col-tablet">
@@ -318,21 +316,36 @@
                                         </a>
                                     </div>
                                     <div class="mdl-tabs__panel is-active" id="customizer1">
-                                        <ul>
-                                            <li>Tywin</li>
-                                            <li>Cersei</li>
-                                            <li>Jamie</li>
-                                            <li>Tyrion</li>
+                                        <ul class="mdl-list">
+                                            <li class="mdl-list__item">
+                                                <span class="mdl-list__item-primary-content">
+                                                    Background Type:
+                                                </span>
+                                                <span class="mdl-list__item-secondary-content">
+                                                    <select id="backType"></select>
+                                                </span>
+                                                <span class="mdl-list__item-tertiary-content">
+                                                    <ul class="palette" data-target=".image-container"></ul>
+                                                </span>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="mdl-tabs__panel" id="customizer2">
-                                        <ul class="md-list">
-                                            <li class="md-list__item">
+                                        <ul class="mdl-list">
+                                            <li class="mdl-list__item">
                                                 <span class="mdl-list__item-primary-content">
                                                     Font type:
                                                 </span>
                                                 <span class="mdl-list__item-secondary-content">
                                                     <select id="imgTextFontType"></select>
+                                                </span>
+                                            </li>
+                                            <li class="mdl-list__item">
+                                                <span class="mdl-list__item-primary-content">
+                                                    Font color:
+                                                </span>
+                                                <span class="mdl-list__item-tertiary-content">
+                                                    <ul class="palette" data-target=".image-container .text"></ul>
                                                 </span>
                                             </li>
                                         </ul>
@@ -351,6 +364,9 @@
                     </section>
                     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored hidden" id="btnInput" href="#input">
                         <i class="material-icons">library_books</i>
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored hidden" id="btnCustomizer" href="#customizer">
+                        <i class="fa fa-paint-brush"></i>
                     </button>
                 </div>
             </main>

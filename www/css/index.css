@@ -86,36 +86,62 @@
 @font-face {
   font-family: 'TangerineBold';
   src: url("../mdlite/font/tangerine/Tangerine_Bold.ttf") format("truetype"); }
+/*@font-face {
+    font-family: 'Cookie';
+    src: url('../mdlite/font/cookie/Cookie-Regular.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Cookie';
-  src: url("../mdlite/font/cookie/Cookie-Regular.ttf") format("truetype"); }
+    font-family: 'Gloria Hallelujah';
+    src: url('../mdlite/font/gloriahallelujah/GloriaHallelujah.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Gloria Hallelujah';
-  src: url("../mdlite/font/gloriahallelujah/GloriaHallelujah.ttf") format("truetype"); }
+    font-family: 'Great Vibes';
+    src: url('../mdlite/font/greatvibes/GreatVibes-Regular.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Great Vibes';
-  src: url("../mdlite/font/greatvibes/GreatVibes-Regular.ttf") format("truetype"); }
+    font-family: 'Indie Flower';
+    src: url('../mdlite/font/indieflower/IndieFlower-Regular.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Indie Flower';
-  src: url("../mdlite/font/indieflower/IndieFlower-Regular.ttf") format("truetype"); }
+    font-family: 'Kaushan Script';
+    src: url('../mdlite/font/kaushanscript/KaushanScript-Regular.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Kaushan Script';
-  src: url("../mdlite/font/kaushanscript/KaushanScript-Regular.ttf") format("truetype"); }
+    font-family: 'Lobster';
+    src: url('../mdlite/font/lobster/Lobster-Regular.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Lobster';
-  src: url("../mdlite/font/lobster/Lobster-Regular.ttf") format("truetype"); }
+    font-family: 'Pacifico';
+    src: url('../mdlite/font/pacifico/Pacifico-Regular.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Pacifico';
-  src: url("../mdlite/font/pacifico/Pacifico-Regular.ttf") format("truetype"); }
+    font-family: 'Rock Salt';
+    src: url('../mdlite/font/rocksalt/RockSalt.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Rock Salt';
-  src: url("../mdlite/font/rocksalt/RockSalt.ttf") format("truetype"); }
+    font-family: 'Satisfy';
+    src: url('../mdlite/font/satisfy/Satisfy-Regular.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Satisfy';
-  src: url("../mdlite/font/satisfy/Satisfy-Regular.ttf") format("truetype"); }
+    font-family: 'Unifraktur Cook Bold';
+    src: url('../mdlite/font/unifrakturcook/UnifrakturCook-Bold.ttf') format('truetype');
+}
 @font-face {
-  font-family: 'Unifraktur Cook Bold';
-  src: url("../mdlite/font/unifrakturcook/UnifrakturCook-Bold.ttf") format("truetype"); }
+    font-family: 'Clicker Script';
+    src: url('../mdlite/font/clickerscript/ClickerScript-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rancho';
+    src: url('../mdlite/font/rancho/Rancho-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Parisienne';
+    src: url('../mdlite/font/parisienne/Parisienne-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Pangolin';
+    src: url('../mdlite/font/pangolin/Pangolin-Regular.ttf') format('truetype');
+}*/
 html,
 body {
   height: 100%;
@@ -252,6 +278,17 @@ input[type="range"] {
   width: 56px;
   height: 56px; }
 
+#btnCustomizer {
+  position: fixed;
+  background: #ffd740;
+  color: #424242;
+  bottom: 135px;
+  right: 10px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 24px; }
+
 #btnInput:not(.hidden) {
   transform: scale(1); }
 
@@ -341,28 +378,6 @@ body {
     width: 0.7em;
     font-size: 340%;
     line-height: 100%; }
-  #lyrics #hymnLyrics .mdl-popup {
-    position: absolute;
-    background: #ffd740;
-    margin-left: 1em;
-    padding: 10px;
-    border-radius: 11px;
-    /*&::after{
-        content: "";
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        background: rgb(255,215,64);
-        bottom: 44px;
-        transform: rotate(45deg);
-        z-index: 1;
-        left: 11px;
-        top: -7px;
-        border: none;
-    }*/ }
-    #lyrics #hymnLyrics .mdl-popup .mdl-popup__content button {
-      background-color: #030303;
-      font-size: 24px; }
 
 .table-results {
   overflow: hidden;
@@ -413,13 +428,30 @@ body {
   align-items: center;
   background: #030303;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  padding: 20px; }
   #customizer .mdl-grid .image-container .text {
-    font-size: 16px; }
+    font-size: 16px;
+    text-align: center; }
 #customizer .mdl-grid .mdl-tabs .mdl-tabs__tab-bar a {
   color: #efefef; }
 #customizer .mdl-grid .mdl-tabs .mdl-tabs__panel {
   padding: 20px 10px; }
+#customizer .mdl-list .mdl-list__item {
+  flex-wrap: wrap; }
+  #customizer .mdl-list .mdl-list__item .mdl-list__item-tertiary-content {
+    flex: 100%;
+    margin: 20px 0 0;
+    text-align: center;
+    min-height: 34.5px; }
+#customizer .palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  list-style: none; }
+  #customizer .palette .color {
+    width: 25px;
+    height: 25px; }
 
 @media (max-width: 479px) {
   #home .mdl-card + .mdl-card {
