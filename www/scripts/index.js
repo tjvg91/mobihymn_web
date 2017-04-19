@@ -41,7 +41,7 @@
     var winWidth, winHeight;
     var scrollAnimate = 0;
 
-    var fontTypes = ['Konsens', 'Roboto', 'Tangerine', /*'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold', 'Clicker Script', 'Rancho', 'Parisienne', 'Pangolin'*/];
+    var fontTypes = ['Konsens', 'Roboto', 'Tangerine', /*'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold', 'Clicker Script', 'Rancho', 'Parisienne', 'Pangolin', 'Petit Formal Script', 'Yesteryear', 'BerkshireSwash', 'Montez', 'Norican', 'Griffy'*/];
 
     var colorNames = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'blue-grey', 'grey', 'black', 'white']
 
