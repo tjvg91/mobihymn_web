@@ -82,15 +82,16 @@
         html: '<tr data-num={{value.num}} href="#lyrics"><td class="mdl-data-table__cell--non-numeric">{{value.num}}</td><td class="mdl-data-table__cell--non-numeric">{{value.line}}</td></tr>',
         src: 'searchResList'
     }, {
-        html: '<div class="mdl-card mdl-shadow--2dp mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone" data-color="{{value.color}}"><div class="mdl-card__title"><h2 class="mdl-card__title-text">{{value.name}}</h2></div>' +
+        html: '<div class="card-container mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone">' +
+            '<div class="mdl-card mdl-shadow--2dp card-front" data-color="{{value.color}}"><div class="mdl-card__title"><h2 class="mdl-card__title-text">{{value.name}}</h2></div>' +
             '<div class="mdl-card__supporting-text">{{value.count}} hymns</div>' +
             '<div class="mdl-card__actions mdl-card--border">' +
             '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple" href="#lyrics" data-id="{{value.id}}" data-num="1">' +
             'Read<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>' +
-            '</div><div class="mdl-card__menu">' +
-            '<button class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button mdl-js-ripple-effect hymnal-info" data-id="{{value.id}}">' +
-            '<i class="fa fa-info"></i>' +
-            '</button></div></div>',
+            '</div></div>' + 
+            '<div class="mdl-card mdl-shadow--2dp card-back" data-color="{{value.color}}" data-back="{{value.image}}">' +
+            '</div>' + 
+            '</div>',
         src: 'hymnalList'
     }]
 
@@ -116,17 +117,6 @@
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
     };
-
-    var setUpLandingPage = function() {
-        var landingWidth = $('.landing .title').width();
-        var landingHeight = $('.landing .title').height();
-
-        $('.landing .title').css({
-            position: 'absolute',
-            left: parseFloat((winWidth / 2) - (landingWidth / 2)).toFixed(2) + 'px',
-            top: parseFloat((winHeight / 2) - (landingHeight / 2) - 20).toFixed(2) + 'px'
-        });
-    }
 
     var setUpNavigation = function() {
         if ($('.mdl-layout__content > section.active').children('.mdl-layout__tab-panel').length > 0) {
@@ -202,46 +192,48 @@
 
     var setUpHymnals = function() {
         refreshNgRepeat('ngRepeats[4]');
-        $('.cards .mdl-card .hymnal-info').click(function(e) {
+        $('.cards .card-container').click(function(e) {
             var target = $(e.target);
-            if (target.is('span.mdl-button__ripple-container'))
-                target = target.parent();
-            var id = target.attr('data-id');
-            var hymnal = hymnalList.find(function(k) {
-                return k.id == id;
-            });
-            var dialog = $('#dialogHymnal');
-            dialog.find('[data-bind="name"]').text(hymnal.name);
-            dialog.find('[data-bind="image"]').css('background-image', 'url("images/hymnals/' + hymnal.image + '")');
-            toggleDialog(dialog, "show");
+            if (!target.is($('.cards .mdl-card a')) && !target.is('span.mdl-button__ripple-container')) {
+                target = target.parents('.card-container');//card-container
+                target.addClass('flip');
+                setTimeout(function () {
+                    target.removeClass('flip');
+                }, 1500);
+            }
+            else {
+                e.preventDefault();
+                $('#mySpinner').css('display', 'block');
+                setTimeout(function () {
+                    e.preventDefault();
+                    if (!target.is('a.mdl-button'))
+                        target = target.parents('a.mdl-button');
+                    var curId = target.attr('data-id').trim();
+                    settings.currentHymnal = Enumerable.From(hymnalList).Where(function (x) {
+                        return x.id == curId;
+                    }).Select(function (x) {
+                        return x;
+                    }).ToArray()[0];
+
+                    settings.currentHymn = hymnList['hymnal' + settings.currentHymnal.id][0];
+                    refreshNgRepeat('ngRepeats[0]');
+                    $('#listHymns li').click(function (e1) {
+                        setUpListItem(e1);
+                    });
+
+                    gotoHymn();
+                    $('#mySpinner').css('display', 'none');
+                    $('.mdl-layout__drawer-button[role="button"]').css('display', 'block');
+                    $('.mdl-layout__header-row').css('display', 'flex');
+                }, 20)
+            }
+               
         })
 
-        $('.cards .mdl-card a').click(function(e) {
-            e.preventDefault();
-            $('#mySpinner').css('display', 'block');
-            var elem = $(this);
-            setTimeout(function() {
-                e.preventDefault();
-                var curId = elem.attr('data-id').trim();
-                settings.currentHymnal = Enumerable.From(hymnalList).Where(function(x) {
-                    return x.id == curId;
-                }).Select(function(x) {
-                    return x;
-                }).ToArray()[0];
-
-                settings.currentHymn = hymnList['hymnal' + settings.currentHymnal.id][0];
-                refreshNgRepeat('ngRepeats[0]');
-                $('#listHymns li').click(function(e1) {
-                    setUpListItem(e1);
-                });
-
-
-                gotoHymn(e);
-                $('#mySpinner').css('display', 'none');
-                $('.mdl-layout__drawer-button[role="button"]').css('display', 'block');
-                $('.mdl-layout__header-row').css('display', 'flex');
-            }, 20)
-        });
+        var dataBack = $('.cards [data-back]');
+        if (dataBack) {
+            dataBack.css('background-image', 'url("' + dataBack.attr('data-back') + '")');
+        }
     }
 
     var toggleDialog = function(element, toggle) {
@@ -476,7 +468,6 @@
         winHeight = $(window).height();
 
         //setUpFireBase();
-        setUpLandingPage();
         setUpNavigation();
         setUpTabs();
         dynamicSizes();
@@ -700,7 +691,6 @@
                 icon.text('bookmark');
                 toggleBookmark(settings.currentHymn, "add", icon);
             } else {
-                //$('#dialogBkmk, .custom-obfuscator').toggle();
                 icon.text('bookmark_border');
                 toggleBookmark(settings.currentHymn, "remove", icon);
             }
@@ -774,6 +764,12 @@
                 itemString = itemString.replace(/\}\}/g, "");
                 var item = $(itemString);
 
+                var dataBack = item.find('[data-back]');
+                if (dataBack) {
+                    dataBack.css({
+                        'background-image': dataBack.attr('data-back')
+                    })
+                }
                 if (prepend != undefined) {
                     if (!prepend)
                         ngRepeat.append(item);

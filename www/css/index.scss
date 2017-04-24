@@ -454,6 +454,9 @@ body {
     background-size: cover;
     z-index: 2000;
     font-family: KonsensSemibold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .title {
         font-size: 42px;
         margin: 0;
@@ -499,33 +502,63 @@ body {
     flex-wrap: wrap;
     width: 100%;
     padding: 0 10px;
-    .mdl-card {
-        width: 90%;
+    height: 100%;
+    .card-container{
+        position: relative;
         margin: 0 auto 20px;
-        background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('../images/sheet-music.jpg');
-        color: #efefef;
-        background-repeat: no-repeat;
-        background-size: cover;
-        .mdl-card__title {
-            max-width: 89%;
-            .mdl-card__title-text {
+        perspective: 1000px;
+        transition: 0.6s;
+	    transform-style: preserve-3d;
+
+        &.flip{
+            transform: rotateY(180deg);
+        }
+
+        .mdl-card {
+            width: 90%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: visible;
+
+            &.card-front{
+                z-index: 2;          
+                background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('../images/sheet-music.jpg');
                 color: #efefef;
-                font-family: 'Tangerine';
-                font-size: 2.1rem;
-                text-shadow: 3px 8px 5px #131313;
+                background-repeat: no-repeat;
+                background-size: cover;   
+                transform: rotateY(0deg);
+            }
+            &.card-back{
+                z-index: 1;
+                background-color: inherit;
+                background-repeat: no-repeat;
+                background-size: cover;
+                transform: rotateY(180deg);
+            }
+            .mdl-card__title {
+                max-width: 89%;
+                .mdl-card__title-text {
+                    color: #efefef;
+                    font-family: 'Tangerine';
+                    font-size: 2.1rem;
+                    text-shadow: 3px 8px 5px #131313;
+                }
+            }
+            .mdl-card__menu {
+                z-index: 3;
+            }
+            .mdl-card__supporting-text {
+                color: #efefef;
+                font-size: 1rem;
+            }
+            .mdl-button {
+                background: inherit;
             }
         }
-        .mdl-card__menu {
-            z-index: 5;
-        }
-        .mdl-card__supporting-text {
-            color: #efefef;
-            font-size: 1rem;
-        }
-        .mdl-button {
-            background: inherit;
-        }
-    }
+    }    
 }
 
 #lyrics {
@@ -661,18 +694,6 @@ body {
             width: 25px;
             height: 25px;
         }
-    }
-}
-
-@media (max-width: 479px) {
-    #home .mdl-card+.mdl-card {
-        margin-top: 20px;
-    }
-}
-
-@media (min-width: 480px) {
-    #home .mdl-card+.mdl-card {
-        margin-top: 0;
     }
 }
 
