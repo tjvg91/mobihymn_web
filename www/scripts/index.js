@@ -43,7 +43,7 @@
     var winWidth, winHeight;
     var scrollAnimate = 0;
 
-    var fontTypes = ['Konsens', 'Roboto', 'Tangerine', /*'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold', 'Clicker Script', 'Rancho', 'Parisienne', 'Pangolin', 'Petit Formal Script', 'Yesteryear', 'BerkshireSwash', 'Montez', 'Norican', 'Griffy'*/];
+    var fontTypes = ['Konsens', 'Roboto', 'Tangerine', /*'Cookie', 'Gloria Hallelujah', 'Great Vibes', 'Indie Flower', 'Kaushan Script', 'Lobster', 'Pacifico', 'Rock Salt', 'Satisfy', 'Unifraktur Cook Bold', 'Clicker Script', 'Rancho', 'Parisienne', 'Pangolin', 'Petit Formal Script', 'Yesteryear', 'BerkshireSwash', 'Montez', 'Norican', 'Griffy'*/ ];
 
     var colorNames = ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'blue-grey', 'grey', 'black', 'white']
 
@@ -88,9 +88,9 @@
             '<div class="mdl-card__actions mdl-card--border">' +
             '<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple" href="#lyrics" data-id="{{value.id}}" data-num="1">' +
             'Read<span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></a>' +
-            '</div></div>' + 
+            '</div></div>' +
             '<div class="mdl-card mdl-shadow--2dp card-back" data-color="{{value.color}}" data-back="{{value.image}}">' +
-            '</div>' + 
+            '</div>' +
             '</div>',
         src: 'hymnalList'
     }]
@@ -195,29 +195,28 @@
         $('.cards .card-container').click(function(e) {
             var target = $(e.target);
             if (!target.is($('.cards .mdl-card a')) && !target.is('span.mdl-button__ripple-container')) {
-                target = target.parents('.card-container');//card-container
+                target = target.parents('.card-container'); //card-container
                 target.addClass('flip');
-                setTimeout(function () {
+                setTimeout(function() {
                     target.removeClass('flip');
                 }, 1500);
-            }
-            else {
+            } else {
                 e.preventDefault();
                 $('#mySpinner').css('display', 'block');
-                setTimeout(function () {
+                setTimeout(function() {
                     e.preventDefault();
                     if (!target.is('a.mdl-button'))
                         target = target.parents('a.mdl-button');
                     var curId = target.attr('data-id').trim();
-                    settings.currentHymnal = Enumerable.From(hymnalList).Where(function (x) {
+                    settings.currentHymnal = Enumerable.From(hymnalList).Where(function(x) {
                         return x.id == curId;
-                    }).Select(function (x) {
+                    }).Select(function(x) {
                         return x;
                     }).ToArray()[0];
 
                     settings.currentHymn = hymnList['hymnal' + settings.currentHymnal.id][0];
                     refreshNgRepeat('ngRepeats[0]');
-                    $('#listHymns li').click(function (e1) {
+                    $('#listHymns li').click(function(e1) {
                         setUpListItem(e1);
                     });
 
@@ -227,12 +226,12 @@
                     $('.mdl-layout__header-row').css('display', 'flex');
                 }, 20)
             }
-               
+
         })
 
         var dataBack = $('.cards [data-back]');
         if (dataBack) {
-            dataBack.css('background-image', 'url("' + dataBack.attr('data-back') + '")');
+            dataBack.css('background-image', 'url("images/hymnals/' + dataBack.attr('data-back') + '")');
         }
     }
 
@@ -438,28 +437,25 @@
         $('#recentLength').val(settings.recentSize);
     }
 
-    var getSelected = function () {
+    var getSelected = function() {
         var sel = '';
         if (window.getSelection) {
             sel = window.getSelection()
-        }
-        else if (document.getSelection) {
+        } else if (document.getSelection) {
             sel = document.getSelection()
-        }
-        else if (document.selection) {
+        } else if (document.selection) {
             sel = document.selection.createRange()
         }
         return sel;
     }
 
-    var myToggleClass = function (elem, oldAddOn, newAddOn) {
+    var myToggleClass = function(elem, oldAddOn, newAddOn) {
         if (newAddOn) {
             if (oldAddOn)
                 elem.toggleClass(newAddOn + ' ' + oldAddOn);
             else
                 elem.toggleClass(newAddOn);
-        }
-        else if (oldAddOn)
+        } else if (oldAddOn)
             elem.toggleClass(oldAddOn);
     }
 
@@ -489,38 +485,36 @@
         });
 
         var imgTextFontType = $('#imgTextFontType');
-        fontTypes.forEach(function (value, index) {
+        fontTypes.forEach(function(value, index) {
             var option = $('<option value="' + value + '">' + value + '</option>');
-            option.css('font-family', value);            
+            option.css('font-family', value);
             imgTextFontType.append(option);
         });
         imgTextFontType.val(settings.customizer.fontName);
 
         var palette = $('.palette');
-        colorNames.forEach(function (value, index) {
-            palette.each(function () {
+        colorNames.forEach(function(value, index) {
+            palette.each(function() {
                 var li = $(colorItem);
                 var target = $(this).attr('data-target');
                 li.addClass(value);
                 if ($(target).is('.image-container .text')) {
                     li.data('color', value + '-text');
-                }
-                else {
+                } else {
                     li.data('color', value);
                 }
                 li.attr('data-target', target);
-                li.click(function () {
+                li.click(function() {
                     var target = $(this).attr('data-target');
                     var className = $(this).data('color');
                     if ($(target).is('.image-container .text')) {
-                        if (settings.customizer.fontClass) 
+                        if (settings.customizer.fontClass)
                             $(target).removeClass(settings.customizer.fontClass);
                         settings.customizer.fontClass = className;
-                    }
-                    else {
+                    } else {
                         if (settings.customizer.backClass)
                             $(target).removeClass(settings.customizer.backClass);
-                        
+
                         settings.customizer.backClass = className;
                     }
                     $(target).addClass(className);
@@ -530,14 +524,14 @@
 
         })
 
-        imgTextFontType.change(function () {
+        imgTextFontType.change(function() {
             var val = $(this).val();
             imageContainer.find('.text').css('font-family', val);
             settings.customizer.fontName = val;
         });
 
         var backType = $('#backType');
-        backTypes.forEach(function (value, index) {
+        backTypes.forEach(function(value, index) {
             var option = $(backTypeItem);
             option.attr('value', value);
             option.text(value);
@@ -580,11 +574,11 @@
             dynamicSizes();
         })
 
-        $('#btnInput').click(function (e) {
+        $('#btnInput').click(function(e) {
             e.preventDefault();
             goToSection(this);
         });
-        $('#btnCustomizer').click(function (e) {
+        $('#btnCustomizer').click(function(e) {
             e.preventDefault();
             var target = $(e.target);
             if (target.is('.fa-paint-brush'))
@@ -633,7 +627,7 @@
             }
         });
 
-        hammerLyrics.on('tap', function (e) {
+        hammerLyrics.on('tap', function(e) {
             if (e.tapCount == 1) {
                 var target = $(e.target);
                 if ($('#btnInput').hasClass('hidden')) {
@@ -648,7 +642,7 @@
             }
         });
 
-        hammerLyrics.on('pressup', function (e) {
+        hammerLyrics.on('pressup', function(e) {
             $('#btnCustomizer').toggleClass('hidden');
         })
 
