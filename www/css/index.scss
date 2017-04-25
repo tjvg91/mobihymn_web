@@ -353,6 +353,12 @@ input[type="range"] {
     .mdl-textfield__input {
         color: rgb(66, 66, 66);
     }
+    .search-clearer {
+        font-size: 22px;
+        position: absolute;
+        top: 30px;
+        right: 5px;
+    }
 }
 
 @media screen and (max-width: 1024px) {

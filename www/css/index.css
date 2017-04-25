@@ -282,6 +282,11 @@ input[type="range"] {
   display: block; }
   .mdl-layout__header .mdl-textfield__input {
     color: #424242; }
+  .mdl-layout__header .search-clearer {
+    font-size: 22px;
+    position: absolute;
+    top: 30px;
+    right: 5px; }
 
 @media screen and (max-width: 1024px) {
   .mdl-layout--fixed-header > .mdl-layout__header {
