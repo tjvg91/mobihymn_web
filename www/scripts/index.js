@@ -57,7 +57,7 @@
             '<i class="fa fa-book mdl-list__item-avatar"></i><span>Hymn #{{value.title}}</span>' +
             '<span class="mdl-list__item-text-body">{{value.firstLine}}</span></span>' +
             '<span class="mdl-list__item-secondary-content"><a class="mdl-list__item-secondary-action set-bookmark" href="#lyrics">' +
-            '<i class="material-icons" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}">bookmark_border</i></a>' +
+            '<i class="fa fa-bookmark-o" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}"></i></a>' +
             '</span></li>',
         src: 'hymnList["hymnal" + settings.currentHymnal["id"]]'
     }, {
@@ -66,16 +66,16 @@
             '<i class="fa fa-history mdl-list__item-avatar"></i><span>Hymn #{{value.title}}</span>' +
             '<span class="mdl-list__item-text-body">{{ value.firstLine }}</span></span>' +
             '<span class="mdl-list__item-secondary-content"><a class="mdl-list__item-secondary-action set-bookmark" href="#">' +
-            '<i class="material-icons" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}">bookmark_border</i></a>' +
+            '<i class="fa fa-bookmark-o" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}"></i></a>' +
             '</span></li>',
         src: 'recentList'
     }, {
         html: '<li class="mdl-list__item mdl-list__item--three-line" data-num="{{value.number}}" data-title="{{value.title}}" data-first-line="{{value.firstLine}}" data-hymnal="{{value.hymnalID}" href="#lyrics">' +
             '<span class="mdl-list__item-primary-content">' +
-            '<i class="material-icons mdl-list__item-avatar">bookmark</i><span>{{ value.firstLine }}</span>' +
+            '<i class="fa fa-bookmark mdl-list__item-avatar"></i><span>{{ value.firstLine }}</span>' +
             '<span class="mdl-list__item-text-body">Hymn #{{value.title}}</span></span>' +
             '<span class="mdl-list__item-secondary-content"><a class="mdl-list__item-secondary-action remove-bookmark">' +
-            '<i class="material-icons" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}">remove_circle</i></a>' +
+            '<i class="fa fa-minus-circle" data-num="{{value.number}}" data-hymnal="{{value.hymnalID}}"></i></a>' +
             '</span></li>',
         src: 'bookmarksList'
     }, {
@@ -244,7 +244,7 @@
     var setUpListItem = function(e) {
         e.preventDefault();
         var target = $(e.target);
-        if (target.hasClass('material-icons') && /^bookmark_border$|^bookmark$/.test(target.text())) {
+        if (target.hasClass('fa-bookmark') || target.hasClass('fa-bookmark-o')) {
             var num = target.attr('data-num').trim();
             var hymnalID = target.attr('data-hymnal').trim();
 
@@ -252,12 +252,12 @@
                 return y.number == num && y.hymnalID == hymnalID;
             }).Select(function(x) { return x; }).ToArray()[0];
 
-            if (target.text() === "bookmark_border") {
+            if (target.hasClass('fa-bookmark-o')) {
                 toggleBookmark(data, "add", target);
             } else {
                 toggleBookmark(data, "remove", target);
             }
-        } else if (target.hasClass('material-icons') && /^remove_circle$/.test(target.text())) {
+        } else if (target.hasClass('fa-minus-circle')) {
             var num = target.attr('data-num');
             var hymnalID = target.attr('data-hymnal');
 
@@ -686,14 +686,13 @@
 
         $('#btnBookmark').click(function(e) {
             e.preventDefault();
-            var icon = $(this).find('.material-icons');
-            if (icon.text() === "bookmark_border") {
-                icon.text('bookmark');
+            var icon = $(this).find('.fa');
+            if (icon.hasClass('fa-bookmark-o')) {
                 toggleBookmark(settings.currentHymn, "add", icon);
             } else {
-                icon.text('bookmark_border');
                 toggleBookmark(settings.currentHymn, "remove", icon);
             }
+            icon.toggleClass('fa-bookmark fa-bookmark-o');
         });
 
         $('.hymn-footer').click(function(e) {
@@ -778,9 +777,7 @@
                 } else {
                     ngRepeat.append(item);
                 }
-                var icon = item.find('i.material-icons').filter(function() {
-                    return this.innerText == 'bookmark_border';
-                });
+                var icon = item.find('.fa-bookmark-o');
                 var bkmkNum = icon.attr('data-num');
                 var bkmkHymnal = icon.attr('data-hymnal');
                 var bkmk = bookmarksList.find(function(value) {
@@ -902,7 +899,7 @@
     }
 
     var toggleBookmark = function(data, mode, icon) {
-        var icon2 = $('i.material-icons[data-num="' + data.number + '"][data-hymnal="' + data.hymnalID + '"]');
+        var icon2 = $('i.fa[data-num="' + data.number + '"][data-hymnal="' + data.hymnalID + '"]');
         if (mode == "add") {
             icon.text('bookmark');
             bookmarksList.push(data);
