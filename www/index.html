@@ -49,14 +49,17 @@
     <div class="mdl-layout__container">
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs has-drawer has-tabs is-upgraded">
             <header class="mdl-layout__header" id="mainHeader">
-                <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button" style="display: none">
+                <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button" style="display: none" id="drawerButton">
                     <i class="fa fa-bars"></i>
                 </div>
+                <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button" style="display: none" id="backer" href="#search">
+                    <i class="fa fa-arrow-left"></i>
+                </div>
                 <div class="mdl-layout__header-row" style="display: none">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right" style="flex-grow: 1">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right text-searcher" style="flex-grow: 1">
                         <input class="mdl-textfield__input" type="text" id="searchHymn" href="#search">
                         <label class="mdl-textfield__label" for="searchHymn">Search</label>
-                        <i class="fa fa-times-circle search-clearer"></i>
+                        <i class="fa fa-times-circle search-clearer" style="display: none"></i>
                     </div>
                     <nav class="mdl-navigation">
                         <a class="mdl-navigation__link" id="btnBookmark"><i class="fa fa-bookmark-o"></i></a>

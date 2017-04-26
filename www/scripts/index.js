@@ -127,7 +127,7 @@
         $('.mdl-layout__drawer .mdl-navigation__link').click(function(e) {
             e.preventDefault();
             goToSection(e.target);
-            $('.mdl-layout__drawer-button').trigger('click');
+            $('#drawerButton').trigger('click');
         });
     }
 
@@ -222,7 +222,7 @@
 
                     gotoHymn();
                     $('#mySpinner').css('display', 'none');
-                    $('.mdl-layout__drawer-button[role="button"]').css('display', 'block');
+                    $('#drawerButton').css('display', 'block');
                     $('.mdl-layout__header-row').css('display', 'flex');
                 }, 20)
             }
@@ -480,8 +480,8 @@
         var myHammer = new Hammer(contentElem[0]);
         myHammer.add(new Hammer.Swipe());
         myHammer.on("panright", function(ev) {
-            if ($('header.mdl-layout__header').css('display') != "none" && $('.mdl-layout__drawer-button').css('display') != 'none')
-                $('.mdl-layout__drawer-button').trigger('click');
+            if ($('header.mdl-layout__header').css('display') != "none" && $('#drawerButton').css('display') != 'none')
+                $('#drawerButton').trigger('click');
         });
 
         var imgTextFontType = $('#imgTextFontType');
@@ -578,6 +578,7 @@
             e.preventDefault();
             goToSection(this);
         });
+
         $('#btnCustomizer').click(function(e) {
             e.preventDefault();
             var target = $(e.target);
@@ -604,24 +605,22 @@
             goToSection(this);
         });
 
-        $('#searchHymn').focusin(function() {
-            var activeSection = $('main > .page-content > section.active');
-            if (activeSection.attr('id') !== "search") {
-                $(this).data('active-section', activeSection.attr('id'));
+        $('#searchHymn').focusin(function () {            
+            var activeSection = $('.mdl-layout__content > .page-content > section.active');
+            if (activeSection.attr('id') !== "search") {                
+                $('#backer').data('active-section', activeSection.attr('id'));
+                $('#backer').attr('href', '#' + activeSection.attr('id'));
                 goToSection(this);
+                $('#backer, #drawerButton, .search-clearer').toggle();
             }
         });
 
-        $('#searchHymn').blur(function() {
-            if ($(this).val().trim() === "") {
-                $(this).attr('href', '#' + $(this).data('active-section'));
-                $(this).val('');
-                goToSection(this);
-                $(this).attr('href', '#search');
-            }
+        $('#backer').click(function () {
+            $('#backer, #drawerButton, .search-clearer').toggle();
+            goToSection(this);
         });
 
-        $('#searchHymn').keyup(function(e) {
+        $('#searchHymn').keyup(function (e) {
             if (e.keyCode == "13") { //enter
                 searchTerm($(this).val());
             }
@@ -736,6 +735,11 @@
             else
                 font = 'Konsens';
             $('#hymnLyrics, #lyrics > h2').css('font-family', font);
+        });
+
+        $('.search-clearer').click(function () {
+            $(this).siblings('input').val('');
+            $('#searchHymn').select();
         });
     }
 
