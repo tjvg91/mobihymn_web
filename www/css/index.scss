@@ -261,7 +261,7 @@ body {
 @media screen and (max-width: 1024px) {
     .mdl-layout__header-row {
         height: 56px;
-        padding: 0 16px 0 52px !important;
+        padding: 0 0 0 52px !important;
     }
 }
 
@@ -351,6 +351,9 @@ input[type="range"] {
     .mdl-textfield__input {
         color: rgb(66, 66, 66);
     }
+    .mdl-navigation__link{
+        font-size: 1.6em;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -369,17 +372,18 @@ input[type="range"] {
     .mdl-layout-title {
         color: #efefef;
         font-family: KonsensSemibold;
+        font-size: 2em;
         .title-white {
             color: #FFFFFF;
         }
         .title-yellow {
             color: #FFF300;
-            margin-left: -5px;
+            margin-left: -7px;
         }
     }
     .mdl-navigation__link {
         color: #efefef !important;
-        font-size: 20px !important;
+        font-size: 1.6em !important;
         &:hover {
             background-color: transparent !important;
             color: #FFF300 !important;
@@ -520,7 +524,7 @@ body {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 200px;
             backface-visibility: visible;
 
             &.card-front{
@@ -562,6 +566,7 @@ body {
 }
 
 #lyrics {
+    margin: 5px 0 0 0;
     #hymnTitle {
         padding: 0;
     }

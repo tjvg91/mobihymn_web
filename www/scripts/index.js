@@ -545,7 +545,7 @@
         });
         backType.val(settings.customizer.backType);
 
-        var hammerLyrics = new Hammer($('#hymnLyrics')[0], {
+        var hammerLyrics = new Hammer($('#lyrics')[0], {
             touchAction: 'pan-y'
         });
         hammerLyrics.get('pinch').set({
