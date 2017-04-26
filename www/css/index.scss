@@ -160,6 +160,8 @@
     font-family: 'TangerineBold';
     src: url('../mdlite/font/tangerine/Tangerine_Bold.ttf') format('truetype');
 }
+
+
 /*@font-face {
     font-family: 'Cookie';
     src: url('../mdlite/font/cookie/Cookie-Regular.ttf') format('truetype');
@@ -351,6 +353,13 @@ input[type="range"] {
     .mdl-textfield__input {
         color: rgb(66, 66, 66);
     }
+    .search-clearer {
+        font-size: 22px;
+        position: absolute;
+        top: 30px;
+        right: 5px;
+    }
+}
     .mdl-navigation__link{
         font-size: 1.6em;
     }
@@ -425,10 +434,10 @@ input[type="range"] {
     height: 56px;
 }
 
-#btnCustomizer{
+#btnCustomizer {
     position: fixed;
-    background: rgb(255,215,64);
-    color: rgb(66,66,66);
+    background: rgb(255, 215, 64);
+    color: rgb(66, 66, 66);
     bottom: 135px;
     right: 10px;
     width: 56px;
@@ -506,36 +515,33 @@ body {
     flex-wrap: wrap;
     width: 100%;
     padding: 0 10px;
-    height: 100%;
-    .card-container{
+    .card-container {
         position: relative;
         margin: 0 auto 20px;
         perspective: 1000px;
         transition: 0.6s;
-	    transform-style: preserve-3d;
-
-        &.flip{
+        transform-style: preserve-3d;
+        height: 200px;
+        &.flip {
             transform: rotateY(180deg);
         }
-
         .mdl-card {
             width: 90%;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 200px;
+            max-height: 200px;
             backface-visibility: visible;
-
-            &.card-front{
-                z-index: 2;          
+            &.card-front {
+                z-index: 2;
                 background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('../images/sheet-music.jpg');
                 color: #efefef;
                 background-repeat: no-repeat;
-                background-size: cover;   
+                background-size: cover;
                 transform: rotateY(0deg);
             }
-            &.card-back{
+            &.card-back {
                 z-index: 1;
                 background-color: inherit;
                 background-repeat: no-repeat;
@@ -562,7 +568,7 @@ body {
                 background: inherit;
             }
         }
-    }    
+    }
 }
 
 #lyrics {
@@ -612,7 +618,7 @@ body {
     .mdl-list {
         .mdl-list__item {
             flex-wrap: wrap;
-            & + .mdl-list__item{
+            &+.mdl-list__item {
                 border-top: 1px solid #efefef;
             }
             .mdl-list__item-primary-content {
@@ -631,18 +637,18 @@ body {
                 margin: 20px 0 0;
                 text-align: center;
                 min-height: 34.5px;
-                .button-group{
+                .button-group {
                     display: flex;
                     justify-content: center;
                     margin: 0 20px;
-                    button{
+                    button {
                         flex-grow: 1;
-                        border: 2px solid rgb(255,215,64);
+                        border: 2px solid rgb(255, 215, 64);
                         font-size: 23px !important;
                         height: 45px;
-                         & + button{
-                             margin-left: -1px;
-                         }
+                        &+button {
+                            margin-left: -1px;
+                        }
                     }
                 }
             }
@@ -653,9 +659,9 @@ body {
     }
 }
 
-#customizer{
-    .mdl-grid{
-        .image-container{
+#customizer {
+    .mdl-grid {
+        .image-container {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -663,23 +669,22 @@ body {
             width: 100%;
             height: 100%;
             padding: 20px;
-            .text{
+            .text {
                 font-size: 16px;
                 text-align: center;
             }
         }
-        .mdl-tabs{
-            .mdl-tabs__tab-bar a{
+        .mdl-tabs {
+            .mdl-tabs__tab-bar a {
                 color: #efefef;
             }
-            .mdl-tabs__panel{
+            .mdl-tabs__panel {
                 padding: 20px 10px;
             }
         }
     }
-
-    .mdl-list{
-        .mdl-list__item{
+    .mdl-list {
+        .mdl-list__item {
             flex-wrap: wrap;
             .mdl-list__item-tertiary-content {
                 flex: 100%;
@@ -689,13 +694,12 @@ body {
             }
         }
     }
-
-    .palette{
+    .palette {
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
         list-style: none;
-        .color{
+        .color {
             width: 25px;
             height: 25px;
         }
