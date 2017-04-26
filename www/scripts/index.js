@@ -231,7 +231,7 @@
 
         var dataBack = $('.cards [data-back]');
         if (dataBack) {
-            dataBack.css('background-image', 'url("images/hymnals/' + dataBack.attr('data-back') + '")');
+            dataBack.css('background-image', 'url("' + dataBack.attr('data-back') + '")');
         }
     }
 

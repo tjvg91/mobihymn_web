@@ -356,10 +356,9 @@ input[type="range"] {
     .search-clearer {
         font-size: 22px;
         position: absolute;
-        top: 30px;
-        right: 5px;
+        top: 27px;
+        right: 15px;
     }
-}
     .mdl-navigation__link{
         font-size: 1.6em;
     }
@@ -515,6 +514,7 @@ body {
     flex-wrap: wrap;
     width: 100%;
     padding: 0 10px;
+    height: 200px;
     .card-container {
         position: relative;
         margin: 0 auto 20px;
