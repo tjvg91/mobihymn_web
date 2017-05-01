@@ -605,22 +605,31 @@
             goToSection(this);
         });
 
-        $('#searchHymn').focusin(function () {            
+        $('#searchHymn').focusin(function() {
             var activeSection = $('.mdl-layout__content > .page-content > section.active');
-            if (activeSection.attr('id') !== "search") {                
+            if (activeSection.attr('id') !== "search") {
                 $('#backer').data('active-section', activeSection.attr('id'));
                 $('#backer').attr('href', '#' + activeSection.attr('id'));
                 goToSection(this);
                 $('#backer, #drawerButton, .search-clearer').toggle();
-            }
+            } else if ($('.search-clearer').css('display') == 'none')
+                $('.search-clearer').toggle();
         });
 
-        $('#backer').click(function () {
-            $('#backer, #drawerButton, .search-clearer').toggle();
+        $('#searchHymn').focusout(function() {
+            var activeSection = $('.mdl-layout__content > .page-content > section.active');
+            var searchClearer = $('.search-clearer');
+            if (searchClearer.css('display') != 'none' && activeSection.attr('id') === "search")
+                searchClearer.toggle();
+        })
+
+        $('#backer').click(function() {
+            $('#backer').toggle('hide');
+            $('#drawerButton').toggle('show');
             goToSection(this);
         });
 
-        $('#searchHymn').keyup(function (e) {
+        $('#searchHymn').keyup(function(e) {
             if (e.keyCode == "13") { //enter
                 searchTerm($(this).val());
             }
@@ -737,7 +746,7 @@
             $('#hymnLyrics, #lyrics > h2').css('font-family', font);
         });
 
-        $('.search-clearer').click(function () {
+        $('.search-clearer').click(function() {
             $(this).siblings('input').val('');
             $('#searchHymn').select();
         });
