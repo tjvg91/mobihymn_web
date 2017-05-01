@@ -456,6 +456,18 @@ body {
       .cards .card-container .mdl-card .mdl-button {
         background: inherit; }
 
+#lyrics.dark-image {
+  background: transparent;
+  color: #efefef; }
+
+#lyrics.dark {
+  background: #0d0d0d;
+  color: #efefef; }
+
+#lyrics.light {
+  background: #fafafa;
+  color: #212121; }
+
 #lyrics #hymnTitle {
   padding: 0; }
 

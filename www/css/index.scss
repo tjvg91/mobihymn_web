@@ -568,6 +568,18 @@ body {
 }
 
 #lyrics {
+    &.dark-image {
+        background: transparent;
+        color: #efefef;
+    }
+    &.dark {
+        background: #0d0d0d;
+        color: #efefef;
+    }
+    &.light {
+        background: #fafafa;
+        color: #212121;
+    }
     #hymnTitle {
         padding: 0;
     }

@@ -19,7 +19,8 @@
         scrollSpeed: 1.00,
         textAlign: "left",
         fontSize: "18px",
-        fontName: "Konsens",
+        fontName: "KonsensMedium",
+        theme: "dark-image",
         recentSize: 5,
         customizer: {
             fontName: 'Konsens',
@@ -435,6 +436,7 @@
         });
         $('#lyrics > .hymn-title').css('fontSize', (settings.fontSize * 1.5) + 'px');
         $('#recentLength').val(settings.recentSize);
+        $('#themeSelector').val(settings.theme);
     }
 
     var getSelected = function() {
@@ -561,6 +563,15 @@
                     settings.font = fontSize;
             }
         });
+
+        $('#lyrics').on('mousewheel DOMMouseScroll', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+                var newFont = parseFloat(settings.fontSize) + parseFloat(parseFloat(e.originalEvent.deltaY).toFixed(2));
+                $('#hymnLyrics').css('font-size', newFont + 'px');
+                settings.fontSize = newFont + 'px';
+            }
+        })
 
         $('.mdl-textfield.mdl-textfield--expandable label').click(function() {
             $(this).parent().toggleClass('is-focused');
@@ -742,7 +753,7 @@
             if (this.checked)
                 font = 'Tangerine';
             else
-                font = 'Konsens';
+                font = 'KonsensMedium';
             $('#hymnLyrics, #lyrics > h2').css('font-family', font);
         });
 
@@ -750,6 +761,12 @@
             $(this).siblings('input').val('');
             $('#searchHymn').select();
         });
+
+        $('#themeSelector').change(function() {
+            var themeVal = $(this).val();
+            $('#lyrics').toggleClass(settings.theme + " " + themeVal);
+            settings.theme = $(this).val();
+        })
     }
 
     var refreshNgRepeat = function(item, prepend) {
@@ -908,16 +925,11 @@
     var toggleBookmark = function(data, mode, icon) {
         var icon2 = $('i.fa[data-num="' + data.number + '"][data-hymnal="' + data.hymnalID + '"]');
         if (mode == "add") {
-            icon.text('bookmark');
             bookmarksList.push(data);
             $('#snckBookmark .mdl-snackbar__text').text('Bookmark added');
             $('#snckBookmark').addClass('mdl-snackbar--active');
-            icon2.text('bookmark');
-            setTimeout(function() {
-                $('#snckBookmark').removeClass('mdl-snackbar--active');
-            }, 3000);
+            icon2.toggleClass('fa-bookmark fa-bookmark-o');
         } else if (mode == "remove") {
-            icon.text('bookmark_border');
             bookmarksList.forEach(function(item, index) {
                 if (item.number === data.number && item.hymnalID === data.hymnalID) {
                     bookmarksList.splice(index, 1);
@@ -926,11 +938,11 @@
             });
             $('#snckBookmark .mdl-snackbar__text').text('Bookmark removed');
             $('#snckBookmark').addClass('mdl-snackbar--active');
-            icon2.text('bookmark_border');
-            setTimeout(function() {
-                $('#snckBookmark').removeClass('mdl-snackbar--active');
-            }, 3000);
+            icon2.toggleClass('fa-bookmark fa-bookmark-o');
         }
+        setTimeout(function() {
+            $('#snckBookmark').removeClass('mdl-snackbar--active');
+        }, 3000);
         refreshNgRepeat('ngRepeats[2]');
 
         $('#listBookmarks li').click(function(e1) {

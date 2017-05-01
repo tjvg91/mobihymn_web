@@ -123,7 +123,7 @@
                         <h2 class="home-title">Hymnals</h2>
                         <div class="cards" ng-repeat="ngRepeats[4]"></div>
                     </section>
-                    <section id="lyrics">
+                    <section id="lyrics" class="dark-image">
                         <h2 style="padding: 0 5px;" class="hymn-title">Hymn #<span id="hymnTitle"></span></h2>
                         <p id="hymnLyrics"></p>
                         <footer class="mdl-mini-footer navbar-fixed-bottom" id="lyricFooter">
@@ -235,6 +235,18 @@
                     </section>
                     <section id="settings">
                         <div class="mdl-list">
+                            <div class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Lyrics background
+                                </span>
+                                <span class="mdl-list__item-secondary-content">
+                                    <select class="mdl-select" id="themeSelector">
+                                        <option value="dark-image">Dark w/ image</option>
+                                        <option value="dark">Dark</option>
+                                        <option value="light">Light</option>
+                                    </select>
+                                </span>
+                            </div>
                             <div class="mdl-list__item">
                                 <span class="mdl-list__item-primary-content">
                                     Extra Spacing
